@@ -4,6 +4,9 @@ from datetime import datetime
 class ProductImage(db.Model):
     __tablename__ = 'product_images'
 
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
     id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
     preview_image = db.Column(db.Boolean, default=False)
