@@ -25,5 +25,8 @@ def seed_shopping_carts():
     db.session.commit()
 
 def undo_shopping_carts():
-    db.session.execute("DELETE FROM shopping_carts")
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.shopping_carts RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM shopping_carts"))
     db.session.commit()
