@@ -1,4 +1,5 @@
-from app.models import db, ShoppingCart
+from app.models import db, ShoppingCart, environment, SCHEMA
+from sqlalchemy.sql import text
 from datetime import datetime
 
 def seed_shopping_carts():

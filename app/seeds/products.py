@@ -1,4 +1,5 @@
-from app.models import db, Product
+from app.models import db, Product, environment, SCHEMA
+from sqlalchemy.sql import text
 from datetime import datetime
 
 def seed_products():

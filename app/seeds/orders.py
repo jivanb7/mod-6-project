@@ -1,4 +1,5 @@
-from app.models import db, Order
+from app.models import db, Order, environment, SCHEMA
+from sqlalchemy.sql import text
 from datetime import datetime
 
 def seed_orders():
