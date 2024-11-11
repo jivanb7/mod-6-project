@@ -11,6 +11,7 @@ def seed_reviews():
             item_quality=5,
             shipping=4,
             customer_service=4,
+            rating=4,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -21,6 +22,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=4,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -31,6 +33,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -41,16 +44,18 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
         Review(
-            user_id=3,
+            user_id=4,
             product_id=3,
             comment="Brings a heartwarming nostalgic feel to the holidays. The details in the tiny buildings are stunning. I love how it lights up in the evenings and creates ambiance.",
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -61,6 +66,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -71,6 +77,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -81,6 +88,7 @@ def seed_reviews():
             item_quality=4,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -91,6 +99,7 @@ def seed_reviews():
             item_quality=5,
             shipping=4,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -101,16 +110,18 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=4,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
         Review(
-            user_id=14,
+            user_id=24,
             product_id=6,
             comment="Very beautiful ornament. The frosted effect adds a perfect rustic touch to my tree. High-quality craftsmanship. It arrived well packaged and looks wonderful.",
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -121,6 +132,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -131,6 +143,7 @@ def seed_reviews():
             item_quality=4,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -141,6 +154,7 @@ def seed_reviews():
             item_quality=5,
             shipping=4,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -151,6 +165,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=4,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -161,6 +176,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -171,7 +187,8 @@ def seed_reviews():
             item_quality=3,
             shipping=5,
             customer_service=5,
-            recommended=False,
+            rating=4,
+            recommended=True,
             created_at=datetime.now()
         ),
         Review(
@@ -181,7 +198,8 @@ def seed_reviews():
             item_quality=5,
             shipping=3,
             customer_service=5,
-            recommended=False,
+            rating=4,
+            recommended=True,
             created_at=datetime.now()
         ),
         Review(
@@ -191,7 +209,8 @@ def seed_reviews():
             item_quality=4,
             shipping=5,
             customer_service=3,
-            recommended=False,
+            rating=4,
+            recommended=True,
             created_at=datetime.now()
         ),
         Review(
@@ -201,6 +220,7 @@ def seed_reviews():
             item_quality=5,
             shipping=4,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -211,6 +231,7 @@ def seed_reviews():
             item_quality=4,
             shipping=5,
             customer_service=4,
+            rating=4,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -221,6 +242,7 @@ def seed_reviews():
             item_quality=5,
             shipping=4,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -231,6 +253,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=4,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -241,6 +264,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -251,6 +275,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -261,6 +286,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -271,6 +297,7 @@ def seed_reviews():
             item_quality=4,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -281,6 +308,7 @@ def seed_reviews():
             item_quality=5,
             shipping=4,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -291,6 +319,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=4,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -301,6 +330,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -311,6 +341,7 @@ def seed_reviews():
             item_quality=3,
             shipping=5,
             customer_service=5,
+            rating=4,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -321,6 +352,7 @@ def seed_reviews():
             item_quality=5,
             shipping=3,
             customer_service=5,
+            rating=4,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -331,7 +363,8 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=3,
-            recommended=False,
+            rating=4,
+            recommended=True,
             created_at=datetime.now()
         ),
         Review(
@@ -341,6 +374,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -351,6 +385,7 @@ def seed_reviews():
             item_quality=4,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -361,6 +396,7 @@ def seed_reviews():
             item_quality=5,
             shipping=4,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -371,16 +407,17 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=4,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
-        ),
-        Review(
+        ), Review(
             user_id=1,
             product_id=23,
             comment="Nice piece of artwork, though I wish the colors were a bit more vibrant. It does create a serene atmosphere in my living room. Overall a good addition to my decor.",
             item_quality=4,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -391,6 +428,7 @@ def seed_reviews():
             item_quality=3,
             shipping=4,
             customer_service=5,
+            rating=4,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -401,6 +439,7 @@ def seed_reviews():
             item_quality=5,
             shipping=3,
             customer_service=4,
+            rating=4,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -411,7 +450,8 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=3,
-            recommended=False,
+            rating=4,
+            recommended=True,
             created_at=datetime.now()
         ),
         Review(
@@ -421,6 +461,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -431,6 +472,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -441,6 +483,7 @@ def seed_reviews():
             item_quality=3,
             shipping=5,
             customer_service=5,
+            rating=4,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -451,7 +494,8 @@ def seed_reviews():
             item_quality=5,
             shipping=3,
             customer_service=5,
-            recommended=False,
+            rating=4,
+            recommended=True,
             created_at=datetime.now()
         ),
         Review(
@@ -461,6 +505,7 @@ def seed_reviews():
             item_quality=4,
             shipping=5,
             customer_service=3,
+            rating=4,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -471,6 +516,7 @@ def seed_reviews():
             item_quality=4,
             shipping=4,
             customer_service=5,
+            rating=4,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -481,6 +527,7 @@ def seed_reviews():
             item_quality=5,
             shipping=4,
             customer_service=4,
+            rating=4,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -491,6 +538,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=4,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -501,6 +549,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -511,6 +560,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -521,6 +571,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -531,6 +582,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -541,6 +593,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -551,6 +604,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -561,16 +615,18 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
-         Review(
+        Review(
             user_id=17,
             product_id=34,
             comment="Beautiful lantern with a soft, warm glow. I love how it creates a cozy holiday ambiance. The only downside is that the glass could be a bit sturdier.",
             item_quality=4,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -581,16 +637,18 @@ def seed_reviews():
             item_quality=5,
             shipping=4,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
-         Review(
+        Review(
             user_id=6,
             product_id=35,
             comment="Cute snowman with a lovely warm glow. It looks adorable among my other decorations. Quality is great, though I would have liked a bit more brightness.",
             item_quality=5,
             shipping=5,
             customer_service=4,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -601,6 +659,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -611,7 +670,8 @@ def seed_reviews():
             item_quality=3,
             shipping=5,
             customer_service=5,
-            recommended=False,
+            rating=4,
+            recommended=True,
             created_at=datetime.now()
         ),
         Review(
@@ -621,6 +681,7 @@ def seed_reviews():
             item_quality=5,
             shipping=3,
             customer_service=5,
+            rating=4,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -631,6 +692,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=3,
+            rating=4,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -641,6 +703,7 @@ def seed_reviews():
             item_quality=4,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -651,6 +714,7 @@ def seed_reviews():
             item_quality=5,
             shipping=4,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -661,6 +725,7 @@ def seed_reviews():
             item_quality=3,
             shipping=5,
             customer_service=4,
+            rating=4,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -671,6 +736,7 @@ def seed_reviews():
             item_quality=5,
             shipping=3,
             customer_service=5,
+            rating=4,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -681,7 +747,8 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=3,
-            recommended=False,
+            rating=4,
+            recommended=True,
             created_at=datetime.now()
         ),
         Review(
@@ -691,6 +758,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -701,6 +769,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -711,6 +780,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -721,6 +791,7 @@ def seed_reviews():
             item_quality=4,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -731,6 +802,7 @@ def seed_reviews():
             item_quality=5,
             shipping=4,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -741,6 +813,7 @@ def seed_reviews():
             item_quality=3,
             shipping=5,
             customer_service=4,
+            rating=4,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -751,7 +824,8 @@ def seed_reviews():
             item_quality=5,
             shipping=3,
             customer_service=5,
-            recommended=False,
+            rating=4,
+            recommended=True,
             created_at=datetime.now()
         ),
         Review(
@@ -761,6 +835,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=3,
+            rating=4,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -771,6 +846,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -781,6 +857,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -791,6 +868,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         ),
@@ -801,6 +879,7 @@ def seed_reviews():
             item_quality=5,
             shipping=5,
             customer_service=5,
+            rating=5,
             recommended=True,
             created_at=datetime.now()
         )

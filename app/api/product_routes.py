@@ -158,20 +158,29 @@ def create_review(product_id):
 
     data = request.get_json()
 
-    rating = data.get('rating')
+    item_quality = data.get('item_quality')
+    shipping = data.get('shipping')
+    customer_service = data.get('customer_service')
     comment = data.get('comment')
 
-    if rating is None or comment is None:
-        return jsonify({'error': 'Rating and comment are required'}), 400
+    if None in [item_quality, shipping, customer_service, comment]:
+        return jsonify({'error': 'Item quality, shipping, customer service, and comment are required'}), 400
 
-    if rating < 1 or rating > 5:
-        return jsonify({'error': 'Rating must be between 1 and 5'}), 400
+    if not (1 <= item_quality <= 5) or not (1 <= shipping <= 5) or not (1 <= customer_service <= 5):
+        return jsonify({'error': 'Ratings must be between 1 and 5'}), 400
+    
+    ##Rating calculation
+    rating = round((item_quality + shipping + customer_service) / 3)
 
     new_review = Review(
         user_id=current_user.id,
-        product_id=product.id, 
-        rating=rating,  
-        comment=comment  
+        product_id=product.id,
+        comment=comment,
+        item_quality=item_quality,
+        shipping=shipping,
+        customer_service=customer_service,
+        rating=rating,
+        recommended=rating >= 4
     )
 
     db.session.add(new_review)

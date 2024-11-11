@@ -14,6 +14,7 @@ class Review(db.Model):
     item_quality = db.Column(db.Integer)
     shipping = db.Column(db.Integer)
     customer_service = db.Column(db.Integer)
+    rating = db.Column(db.Integer)
     recommended = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
 
@@ -29,6 +30,7 @@ class Review(db.Model):
             'item_quality': self.item_quality,
             'shipping': self.shipping,
             'customer_service': self.customer_service,
+            'rating': self.rating,
             'recommended': self.recommended,
             'created_at': self.created_at
         }

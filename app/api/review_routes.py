@@ -1,6 +1,6 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Review
+from app.models import Review, db
 
 review_routes = Blueprint('reviews', __name__)
 
@@ -34,18 +34,22 @@ def edit_review(review_id):
     
     data = request.get_json()
 
-    if 'rating' in data:
-        review.rating = data['rating']
-    if 'comment' in data:
-        review.comment = data['comment']
     if 'item_quality' in data:
         review.item_quality = data['item_quality']
     if 'shipping' in data:
         review.shipping = data['shipping']
     if 'customer_service' in data:
         review.customer_service = data['customer_service']
-    if 'recommended' in data:
-        review.recommended = data['recommended']
+    if 'comment' in data:
+        review.comment = data['comment']
+
+    if any(rating < 1 or rating > 5 for rating in [review.item_quality, review.shipping, review.customer_service]):
+        return jsonify({'error': 'All ratings must be between 1 and 5'}), 400
+    
+    #recalculate rating, recommended if it's above 4
+    rating = round((review.item_quality + review.shipping + review.customer_service) / 3)
+    review.rating = rating
+    review.recommended = rating >= 4
 
     db.session.commit()
 
