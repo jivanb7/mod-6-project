@@ -862,7 +862,7 @@ def seed_reviews():
             created_at=datetime.now()
         ),
         Review(
-            user_id=28,
+            user_id=2,
             product_id=52,
             comment="This eggnog ornament is adorable and festive. It looks fantastic on my tree, and the colors are vibrant. The quality is great, and it adds a playful touch.",
             item_quality=5,
@@ -873,7 +873,7 @@ def seed_reviews():
             created_at=datetime.now()
         ),
         Review(
-            user_id=28,
+            user_id=1,
             product_id=52,
             comment="Love this ornament. It adds a pop of color to my tree, and the craftsmanship is really good. It is one of my favorite new additions this holiday season.",
             item_quality=5,
