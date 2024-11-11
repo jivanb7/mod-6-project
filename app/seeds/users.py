@@ -4,16 +4,36 @@ from sqlalchemy.sql import text
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
-    demo = User(
-        username='Demo', email='demo@aa.io', password='password')
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
+    users = [
+        User(username='angelangel', email='aaa@aa.io', password='pasword1!'),
+        User(username='bellbell', email='bbb@aa.io', password='pasword1!'),
+        User(username='candycandy', email='ccc@aa.io', password='pasword1!'),
+        User(username='decordecor', email='ddd@aa.io', password='pasword1!'),
+        User(username='evergreenevergreen', email='eee@aa.io', password='pasword1!'),
+        User(username='frostyfrosty', email='fff@aa.io', password='pasword1!'),
+        User(username='gingerbreadgingerbread', email='ggg@aa.io', password='pasword1!'),
+        User(username='holidayholiday', email='hhh@aa.io', password='pasword1!'),
+        User(username='icicleicicle', email='iii@aa.io', password='pasword1!'),
+        User(username='jinglejingle', email='jjj@aa.io', password='pasword1!'),
+        User(username='krampuskrampus', email='kkk@aa.io', password='pasword1!'),
+        User(username='lightslights', email='lll@aa.io', password='pasword1!'),
+        User(username='merrymerry', email='mmm@aa.io', password='pasword1!'),
+        User(username='nutcrackernutcracker', email='nnn@aa.io', password='pasword1!'),
+        User(username='ornamentornament', email='ooo@aa.io', password='pasword1!'),
+        User(username='pineconepinecone', email='ppp@aa.io', password='pasword1!'),
+        User(username='quiltquilt', email='qqq@aa.io', password='pasword1!'),
+        User(username='reindeerreindeer', email='rrr@aa.io', password='pasword1!'),
+        User(username='snowflakesnowflake', email='sss@aa.io', password='pasword1!'),
+        User(username='tinseltinsel', email='ttt@aa.io', password='pasword1!'),
+        User(username='unwrapunwrap', email='uuu@aa.io', password='pasword1!'),
+        User(username='vixenvixen', email='vvv@aa.io', password='pasword1!'),
+        User(username='winterwinter', email='www@aa.io', password='pasword1!'),
+        User(username='xmasxmas', email='xxx@aa.io', password='pasword1!'),
+        User(username='yuleyule', email='yyy@aa.io', password='pasword1!'),
+        User(username='zestyzesty', email='zzz@aa.io', password='pasword1!')
+    ]
 
-    db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
+    db.session.bulk_save_objects(users)
     db.session.commit()
 
 
