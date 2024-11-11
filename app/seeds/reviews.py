@@ -554,7 +554,7 @@ def seed_reviews():
             created_at=datetime.now()
         ),
         Review(
-            user_id=14,
+            user_id=15,
             product_id=28,
             comment="Love this scarf. It is incredibly soft, warm, and has a wonderful festive design. The quality is superb, and it keeps me cozy throughout the chilly season.",
             item_quality=5,
@@ -620,7 +620,7 @@ def seed_reviews():
             created_at=datetime.now()
         ),
         Review(
-            user_id=17,
+            user_id=18,
             product_id=34,
             comment="Beautiful lantern with a soft, warm glow. I love how it creates a cozy holiday ambiance. The only downside is that the glass could be a bit sturdier.",
             item_quality=4,
