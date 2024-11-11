@@ -32,11 +32,11 @@ def seed():
         undo_shopping_carts()
     seed_users()
     # Add other seed functions here
-    seed_favorites()
-    seed_orders()
+    seed_products() 
     seed_product_images()
-    seed_products()
-    seed_reviews()
+    seed_orders()
+    seed_favorites()
+    seed_reviews()         
     seed_shopping_carts()
 
 # Creates the `flask seed undo` command
