@@ -17,11 +17,11 @@ class Product(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now)
 
     user = db.relationship("User", back_populates="products")
-    reviews = db.relationship("Review", back_populates="product")
-    orders = db.relationship("Order", back_populates="product")
-    shopping_carts = db.relationship("ShoppingCart", back_populates="product")
-    favorites = db.relationship("Favorite", back_populates="product")
-    product_images = db.relationship("ProductImage", back_populates="product")
+    reviews = db.relationship("Review", back_populates="product", cascade='all, delete')
+    orders = db.relationship("Order", back_populates="product", cascade='all, delete')
+    shopping_carts = db.relationship("ShoppingCart", back_populates="product", cascade='all, delete')
+    favorites = db.relationship("Favorite", back_populates="product", cascade='all, delete')
+    product_images = db.relationship("ProductImage", back_populates="product", cascade='all, delete')
 
     def to_dict(self):
         return {
