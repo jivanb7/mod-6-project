@@ -156,6 +156,11 @@ def create_review(product_id):
     if product.user_id == current_user.id:
         return jsonify({'error': 'You cannot review your own product'}), 400
 
+    # Check if the user has already reviewed this product
+    existing_review = Review.query.filter_by(user_id=current_user.id, product_id=product_id).first()
+    if existing_review:
+        return jsonify({'error': 'You have already reviewed this product'}), 400
+
     data = request.get_json()
 
     item_quality = data.get('item_quality')

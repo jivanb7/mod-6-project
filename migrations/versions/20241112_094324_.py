@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: ec6d8f55da8b
+Revision ID: 19ae62370e36
 Revises: 
-Create Date: 2024-11-08 11:23:05.876504
+Create Date: 2024-11-12 09:43:24.293299
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ec6d8f55da8b'
+revision = '19ae62370e36'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -29,7 +29,7 @@ def upgrade():
     )
     op.create_table('products',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('category', sa.String(length=255), nullable=False),
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('description', sa.Text(), nullable=False),
@@ -70,13 +70,13 @@ def upgrade():
     )
     op.create_table('reviews',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('product_id', sa.Integer(), nullable=False),
-    sa.Column('rating', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('product_id', sa.Integer(), nullable=True),
     sa.Column('comment', sa.Text(), nullable=True),
     sa.Column('item_quality', sa.Integer(), nullable=True),
     sa.Column('shipping', sa.Integer(), nullable=True),
     sa.Column('customer_service', sa.Integer(), nullable=True),
+    sa.Column('rating', sa.Integer(), nullable=True),
     sa.Column('recommended', sa.Boolean(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),

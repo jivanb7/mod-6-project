@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.models import User, db, Favorite, Product
+from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -69,49 +69,3 @@ def unauthorized():
     """
     return {'errors': {'message': 'Unauthorized'}}, 401
 
-@auth_routes.route('/favorites', methods=['GET'])
-@login_required
-def get_favorites():
-    """
-    Get all the favorite products for the logged-in user.
-    """
-    favorites = Favorite.query.filter_by(user_id=current_user.id).all()
-
-    favorite_products = []
-    for favorite in favorites:
-        product = Product.query.get(favorite.product_id)
-        if product: 
-            favorite_products.append(product.to_dict())
-    
-    return jsonify(favorite_products), 200
-
-@auth_routes.route('/favorites', methods=['POST'])
-@login_required
-def add_favorite():
-    """
-    Add a product to the logged-in user's favorites.
-    """
-    data = request.get_json()
-    product_id = data.get('product_id')
-
-    new_favorite = Favorite(user_id=current_user.id, product_id=product_id)
-    db.session.add(new_favorite)
-    db.session.commit()
-
-    return jsonify({'message': 'Product added to favorites'}), 201
-
-@auth_routes.route('/favorites/<int:product_id>', methods=['DELETE'])
-@login_required
-def remove_favorite(product_id):
-    """
-    Remove a product from the logged-in user's favorites.
-    """
-    favorite = Favorite.query.filter_by(user_id=current_user.id, product_id=product_id).first()
-
-    if not favorite:
-        return jsonify({'error': 'Favorite not found'}), 404
-
-    db.session.delete(favorite)
-    db.session.commit()
-
-    return jsonify({'message': 'Product removed from favorites'}), 200

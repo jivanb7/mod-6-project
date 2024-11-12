@@ -4,7 +4,7 @@ from app.models import ShoppingCart, Product, db
 
 cart_routes = Blueprint('cart', __name__)
 
-@cart_routes.route('/', methods=['GET']) 
+@cart_routes.route('/current', methods=['GET'])
 @login_required  
 def get_cart():
     """
