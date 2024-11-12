@@ -1,0 +1,115 @@
+.landing-page {
+    font-family: Arial, sans-serif;
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Header Block */
+  .header-block {
+    padding: 20px;
+    background-color: #f7f7f7;
+    cursor: pointer;
+  }
+  .header-block h1 {
+    font-size: 2em;
+    margin: 0;
+  }
+  .header-block button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #e60023;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Category Block */
+  .category-block {
+    padding: 20px;
+    background-color: #e0f7fa;
+  }
+  .category-block h2 {
+    margin-bottom: 10px;
+  }
+  .category-list {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  .category-item {
+    padding: 10px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* General Block */
+  .general-block {
+    padding: 20px;
+    background-color: #f3e5f5;
+  }
+  .product-list {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  .product-item {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 120px;
+    text-align: left;
+  }
+  .product-image {
+    height: 100px;
+    background-color: #ccc;
+    margin-bottom: 10px;
+  }
+  .product-info {
+    font-size: 0.9em;
+  }
+  .general-block button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #e60023;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Information Section Block */
+  .info-block {
+    padding: 20px;
+    background-color: #f0f0f0;
+  }
+  .info-block h2 {
+    font-size: 1.5em;
+  }
+  .info-sections {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+  }
+  .info-item {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  .help-center {
+    margin-top: 20px;
+  }
+  .help-center p {
+    margin: 0;
+  }
+  .help-center button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
