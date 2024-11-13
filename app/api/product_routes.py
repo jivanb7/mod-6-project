@@ -34,8 +34,18 @@ def get_product_detail(product_id):
 
     if not product:
         return jsonify({'error': 'Product not found'}), 404
+    
+    product_data = product.to_dict()
 
-    return jsonify(product.to_dict()), 200
+    preview_image = None
+    for image in product.product_images:
+        if image.preview_image:
+            preview_image = image.to_dict()
+            break
+    
+    product_data['preview_image'] = preview_image
+
+    return jsonify(product_data), 200 
 
 @product_routes.route('/', methods=['POST'])
 @login_required
