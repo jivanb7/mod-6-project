@@ -1,3 +1,79 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: linear-gradient(to bottom, #2E7D32, #4CAF50); /* Dark green to green gradient */
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.site-name {
+  font-size: 1.5em;
+  font-weight: bold;
+  font-family: Helvetica, Arial, sans-serif;
+  color: white;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.get-favorites,
+.shopping-cart-icon,
+.profile-button-icon {
+  display: flex;
+  align-items: center;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: white;
+}
+
+.get-favorites:hover,
+.shopping-cart-icon:hover,
+.profile-button-icon:hover {
+  color: #A5D6A7;
+}
+
+.profile-button {
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 24px;
+  padding: 10px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.profile-button:hover {
+  background-color: #388E3C; /* Slightly darker green on hover */
+}
+
 .profile-dropdown {
-  position: absolute;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  min-width: 150px;
+  padding: 10px;
+  margin-right: 10px;
+  z-index: 100;
 }

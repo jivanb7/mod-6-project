@@ -38,54 +38,61 @@ function SignupFormModal() {
     }
   };
 
+  const isButtonDisabled = username.length < 4 || password.length < 6 || confirmPassword === '';
+
   return (
-    <>
+    <div className="modal-box">
       <h1>Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit}>
         <label>
           Email
+        </label>
+
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </label>
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <p className='errors-sign-up'>{errors.email}</p>}
         <label>
           Username
+                  </label>
+
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        </label>
-        {errors.username && <p>{errors.username}</p>}
+        {errors.username && <p className='errors-sign-up'>{errors.username}</p>}
         <label>
           Password
+        </label>
+
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
+        {errors.password && <p className='errors-sign-up'>{errors.password}</p>}
         <label>
           Confirm Password
+        </label>
           <input
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-        </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        {errors.confirmPassword && <p className='errors-sign-up'>{errors.confirmPassword}</p>}
+        <button type="submit"
+                  disabled={isButtonDisabled}
+          className='signup-button'>Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 
