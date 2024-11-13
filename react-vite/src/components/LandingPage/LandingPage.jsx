@@ -15,7 +15,7 @@ export default function LandingPage() {
   return (
     <div className="landing-page">
       {/* Header Block */}
-      <div className="header-block" onClick={() => navigate('/products')}>
+      <div className="header-block" onClick={() => navigate('/product')}>
         <h1>Very Merry Holiday Deals!</h1>
         <button>Shop Now</button>
       </div>
@@ -25,7 +25,7 @@ export default function LandingPage() {
         <h2>Featured Categories</h2>
         <div className="category-list">
           {categories.map(category => (
-            <div key={category} className="category-item" onClick={() => navigate(`/products?category=${category}`)}>
+            <div key={category} className="category-item" onClick={() => navigate(`/product?category=${category}`)}>
               {category}
             </div>
           ))}
@@ -47,7 +47,7 @@ export default function LandingPage() {
             </div>
           ))}
         </div>
-        <button onClick={() => navigate('/products')}>See All Products</button>
+        <button onClick={() => navigate('/product')}>See All Products</button>
       </div>
 
       {/* Information Section Block */}
@@ -57,15 +57,15 @@ export default function LandingPage() {
         <div className="info-sections">
           <div className="info-item">
             <h4>A community doing good</h4>
-            <p>Description about community initiatives on Etsy.</p>
+            <p>X-Mas List is a global online marketplace, where people come together to make, sell, buy, and collect unique items. We are also a community pushing for positive change for small businesses, people, and the planet. </p>
           </div>
           <div className="info-item">
             <h4>Support independent creators</h4>
-            <p>Description about Etsy supporting creators.</p>
+            <p>There is no X-Mas List warehouse, just millions of people selling the things they love. We make the whole process easy, helping you connect directly with makers to find something extraordinary.</p>
           </div>
           <div className="info-item">
             <h4>Peace of Mind</h4>
-            <p>Description about customer security and trust on Etsy.</p>
+            <p>Your privacy is the highest priority of our dedicated team. And if you ever need assistance, we are always ready to step in for support.</p>
           </div>
         </div>
         <div className="help-center">
