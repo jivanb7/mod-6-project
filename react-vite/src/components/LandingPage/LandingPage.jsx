@@ -1,58 +1,43 @@
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux'
+import SmallProductTile from '../SmallProductTile';
 import './LandingPage.css';
 
 export default function LandingPage() {
   const navigate = useNavigate();
 
-  // Placeholder product data until the API is ready
-  const categories = ["Ornaments", "Apparel", "Decor", "Gifts", "Baking"];
-  const products = [
-    { id: 1, title: "Sample Product 1", price: "$28.28", rating: 4.9, reviews: 690 },
-    { id: 2, title: "Sample Product 2", price: "$35.00", rating: 4.8, reviews: 500 },
-    
-  ];
+  const products = useSelector(state => state.products.products);
+  const featuredProducts = products.slice(0, 5);
+
 
   return (
     <div className="landing-page">
       {/* Header Block */}
-      <div className="header-block" onClick={() => navigate('/product')}>
-        <h1>Very Merry Holiday Deals!</h1>
-        <button>Shop Now</button>
-      </div>
-
-      {/* Category Block */}
-      <div className="category-block">
-        <h2>Featured Categories</h2>
-        <div className="category-list">
-          {categories.map(category => (
-            <div key={category} className="category-item" onClick={() => navigate(`/product?category=${category}`)}>
-              {category}
-            </div>
-          ))}
+      <div className="header-block">
+        <div className="header-content">
+          <h1 className="kalnia-title">Very merry deals!</h1>
+          <p className="subtitle">Celebrate the holidays with handcrafted gifts</p>
+          <button onClick={() => navigate('/product')} className="shop-button">Shop deals</button>
+        </div>
+        <div className="header-image">
+          <img src="https://i.imgur.com/J00IwtY.png" alt="Family Christmas" />
         </div>
       </div>
 
       {/* General Block */}
       <div className="general-block">
-        <h2>Amazing deals, updated daily</h2>
-        <div className="product-list">
-          {products.map(product => (
-            <div key={product.id} className="product-item">
-              <div className="product-image">[Image]</div>
-              <div className="product-info">
-                <p className="product-title">{product.title}</p>
-                <p className="product-price">{product.price}</p>
-                <p className="product-rating">{product.rating} ({product.reviews})</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        <button onClick={() => navigate('/product')}>See All Products</button>
+      <h2>Amazing deals, updated daily</h2>
+      <div className="product-list">
+        {featuredProducts.map(product => (
+          <SmallProductTile key={product.id} product={product} />
+        ))}
       </div>
+      <button onClick={() => navigate('/product')} className="shop-button">See All Products</button>
+    </div>
 
       {/* Information Section Block */}
       <div className="info-block">
-        <h2>What is Etsy?</h2>
+        <h2>What is X-Mas List?</h2>
         <h3>Read our wonderfully weird story</h3>
         <div className="info-sections">
           <div className="info-item">
@@ -69,8 +54,8 @@ export default function LandingPage() {
           </div>
         </div>
         <div className="help-center">
-          <p>Have a question? Well, we got some answers</p>
-          <button onClick={() => window.open("https://www.youtube.com/watch?v=CxAcgbKUFb4", "_blank")}>
+          <div className="help-text">Have a question? Well, we got some answers</div>
+          <button onClick={() => window.open("https://www.youtube.com/watch?v=CxAcgbKUFb4", "_blank")} className="shop-button">
             Go to Help Center
           </button>
         </div>

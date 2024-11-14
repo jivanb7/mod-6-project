@@ -1,5 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-//import './ProductsPage.css';
+import { FaPlus } from 'react-icons/fa'; 
+import { FaUser } from 'react-icons/fa';
+import { FaStar } from 'react-icons/fa';
+import './ProductTile.css'
 
 export default function ProductsPage({product}) {
     const navigate = useNavigate();
@@ -8,7 +11,12 @@ export default function ProductsPage({product}) {
         navigate(`/product/${product.id}`)
     }
 
-    const tileRating = product.average_rating ? `${product.average_rating} (${product.review_count})` : 'New';
+    const tileRating = product.average_rating ? (
+        <>
+            {product.average_rating} <FaStar className="star-icon" /> ({product.review_count})
+        </>
+    ) : 'New';
+    
 
 
     return(
@@ -18,9 +26,9 @@ export default function ProductsPage({product}) {
                 <p>{product.name} </p>
                 <p>{tileRating}</p>
             </div>
-            <div className="product-creator">{product.username}</div>
-            <div className="product-price">{product.price}</div>
-            <button className="button-add-cart">Add to Cart</button>
+            <div className="product-creator"><FaUser className="user-icon" />  {product.username}</div>
+            <div className="product-price">${product.price.toFixed(2)}</div>
+            <button className="button-add-cart"><FaPlus className="plus-icon" />                                                                                    Add to Cart</button>
         </div>
     )
 }
