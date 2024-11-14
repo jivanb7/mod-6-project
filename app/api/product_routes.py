@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Product, db, Review
+from app.models import Product, db, Review, User
 
 product_routes = Blueprint('products', __name__)
 
@@ -148,7 +148,14 @@ def get_product_reviews(product_id):
     if not reviews:
         return jsonify({'message': 'No reviews found for this product'}), 404
 
-    return jsonify([review.to_dict() for review in reviews]), 200
+    reviews_with_usernames = []
+    for review in reviews:
+        user = User.query.get(review.user_id)
+        review_dict = review.to_dict()
+        review_dict['username'] = user.username
+        reviews_with_usernames.append(review_dict)
+
+    return jsonify(reviews_with_usernames), 200
 
 @product_routes.route('/<int:product_id>/reviews', methods=['POST'])
 @login_required 
