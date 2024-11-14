@@ -23,14 +23,30 @@ class Product(db.Model):
     favorites = db.relationship("Favorite", back_populates="product", cascade='all, delete')
     product_images = db.relationship("ProductImage", back_populates="product", cascade='all, delete')
 
+    def calculate_average_rating(self):
+        if not self.reviews:
+            return None
+        total_rating = sum(review.rating for review in self.reviews)
+        return round(total_rating / len(self.reviews), 1)
+
     def to_dict(self):
+        preview_image_url = None
+        for image in self.product_images:
+            if image.preview_image:
+                preview_image_url = image.image_url
+                break
+
         return {
             'id': self.id,
             'user_id': self.user_id,
+            'username': self.user.username, 
             'category': self.category,
             'name': self.name,
             'description': self.description,
             'price': float(self.price),
             'stock': self.stock,
-            'created_at': self.created_at
+            'created_at': self.created_at,
+            'previewImage': preview_image_url, 
+            'average_rating': self.calculate_average_rating(),
+            'review_count': len(self.reviews)
         }

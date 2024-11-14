@@ -3,6 +3,7 @@ import LandingPage from '../components/LandingPage'
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import FavoritesPage from '../components/FavoritesPage';
+import ProductsPage from '../components/ProductsPage';
 import ProductDetail from '../components/ProductDetail/ProductDetail';
 import Layout from './Layout';
 import ShoppingCartPage from "../components/ShoppingCartPage/index.js";
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
         path: "favorites",
         element: <FavoritesPage />
 
+      },
+      {
+        path: "/product",
+        element: <ProductsPage />,
       },
       {
         path: "shopping-cart",
