@@ -1,0 +1,11 @@
+.review-container {
+    margin-bottom: 30px;
+  }
+  
+.product-detail {
+  display: flex;
+}
+
+.revstarall {
+  display: flex;
+}
