@@ -5,6 +5,7 @@ import SignupFormPage from '../components/SignupFormPage';
 import FavoritesPage from '../components/FavoritesPage';
 import ProductDetail from '../components/ProductDetail/ProductDetail';
 import Layout from './Layout';
+import ShoppingCartPage from "../components/ShoppingCartPage/index.js";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,11 @@ export const router = createBrowserRouter([
       {
         path: "favorites",
         element: <FavoritesPage />
+
+      },
+      {
+        path: "shopping-cart",
+        element: <ShoppingCartPage />
 
       },
       {

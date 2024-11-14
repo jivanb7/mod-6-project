@@ -1,8 +1,7 @@
-import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { PiShoppingCartSimple, PiHeartBold } from "react-icons/pi";
+import {useSelector} from "react-redux";
+import {Link} from "react-router-dom";
+import {PiShoppingCartSimple, PiHeartBold} from "react-icons/pi";
 import "./Navigation.css";
 
 function Navigation() {
@@ -12,7 +11,8 @@ function Navigation() {
     <header className="navigation">
       <div className="nav-left">
         <Link to="/" className="site-logo">
-          <img src='https://raw.githubusercontent.com/djdinnebeil/xmas-list-images/refs/heads/main/xmas-list-logo.jpg' alt="Site Logo" className="logo" />
+          <img src='https://raw.githubusercontent.com/djdinnebeil/xmas-list-images/refs/heads/main/xmas-list-logo.jpg'
+               alt="Site Logo" className="logo"/>
           <span className="site-name">X-Mas List</span>
         </Link>
       </div>
@@ -20,12 +20,14 @@ function Navigation() {
         {sessionUser && (
           <>
             <Link to="/favorites" className="get-favorites">
-              <PiHeartBold />
+              <PiHeartBold/>
             </Link>
           </>
-        ) }
-        <PiShoppingCartSimple className="shopping-cart-icon" />
-        <ProfileButton className="profile-button-pointer"  />
+        )}
+        <Link to="/shopping-cart">
+          <PiShoppingCartSimple className="shopping-cart-icon"/>
+        </Link>
+        <ProfileButton className="profile-button-pointer"/>
       </div>
     </header>
   );

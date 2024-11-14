@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
-from app.models import User, db, Favorite, Product
+from app.models import User, db, Favorite, Product, ProductImage
 
 favorite_routes = Blueprint('favorites', __name__)
 
@@ -8,7 +8,7 @@ favorite_routes = Blueprint('favorites', __name__)
 @login_required
 def get_favorites():
     """
-    Get all the favorite products for the logged-in user.
+    Get all the favorite products for the logged-in user, including preview image.
     """
     favorites = Favorite.query.filter_by(user_id=current_user.id).all()
 
@@ -16,7 +16,12 @@ def get_favorites():
     for favorite in favorites:
         product = Product.query.get(favorite.product_id)
         if product:
-            favorite_products.append(product.to_dict())
+            # Retrieve the preview image for the product
+            preview_image = ProductImage.query.filter_by(product_id=product.id, preview_image=True).first()
+            product_data = product.to_dict()
+            if preview_image:
+                product_data['preview_image'] = preview_image.image_url  # Add preview image URL
+            favorite_products.append(product_data)
 
     return jsonify(favorite_products), 200
 
