@@ -42,14 +42,14 @@ def edit_review(review_id):
         review.customer_service = data['customer_service']
     if 'comment' in data:
         review.comment = data['comment']
+    if 'recommended' in data:
+        review.recommended = data['recommended']
 
     if any(rating < 1 or rating > 5 for rating in [review.item_quality, review.shipping, review.customer_service]):
         return jsonify({'error': 'All ratings must be between 1 and 5'}), 400
     
-    #recalculate rating, recommended if it's above 4
     rating = round((review.item_quality + review.shipping + review.customer_service) / 3)
     review.rating = rating
-    review.recommended = rating >= 4
 
     db.session.commit()
 

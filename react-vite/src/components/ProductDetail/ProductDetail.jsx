@@ -22,14 +22,13 @@ function ProductDetail() {
   const reviews = useSelector((state) => state.reviews.reviews);
   const currentUser = useSelector((state) => state.session.user);
   const [selectedImage, setSelectedImage] = useState(product?.preview_image);
-  const favorites = useSelector((state) => state.favorites.favorites);
+  const [localIsFavorited, setLocalIsFavorited] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const isOwner = currentUser && currentUser.id === product?.user_id;
   const isLoggedIn = Boolean(currentUser);
   const userReview = reviews.find((review) => review.user_id === currentUser?.id);
   const nonPreviewImages = product?.non_preview_images || [];  
-  const isFavorited = favorites.some(favorite => favorite.product_id === product.id);
-
 
   const handleAddToCart = () => {
     dispatch(addToCart(product_id));
@@ -41,15 +40,27 @@ function ProductDetail() {
     }
   }, [dispatch, currentUser]);
 
-
-  const handleFavoriteToggle = () => {
-    if (isFavorited) {
-      dispatch(removeFromFavorites(product_id));
-    } else {
-      dispatch(addToFavorites(product_id)); 
+  const handleFavoriteToggle = async () => {
+    const optimisticState = !localIsFavorited;
+    setLocalIsFavorited(optimisticState);
+    setIsLoading(true);
+    
+    try {
+      if (optimisticState) {
+        await dispatch(addToFavorites(product_id)); 
+      } else {
+        await dispatch(removeFromFavorites(product_id)); 
+      }
+      await dispatch(fetchFavorites());
+  
+    } catch (error) {
+      console.error("Error updating favorites:", error);
+      setLocalIsFavorited(!optimisticState);
+    } finally {
+      setIsLoading(false);
     }
   };
-
+  
   useEffect(() => {
     if (product && product.preview_image) {
       setSelectedImage(product.preview_image);
@@ -111,14 +122,19 @@ function ProductDetail() {
 
             
             {currentUser && (
-            <button onClick={handleFavoriteToggle} className="favorite-button">
-            {isFavorited ? (
-              <FaHeart color="red" style={{ fontSize: "24px" }} />
-            ) : (
-              <FaRegHeart color="gray" style={{ fontSize: "24px" }} />
+              <button
+                onClick={handleFavoriteToggle}
+                className="favorite-button"
+                disabled={isLoading} 
+              >
+                {localIsFavorited ? (
+                  <FaHeart style={{ width: "24px", color: "red" }} />
+                ) : (
+                  <FaRegHeart style={{ width: "24px", color: "gray" }} />
+                )}
+              </button>
             )}
-          </button>
-        )}
+
 
             </div>
 
@@ -144,6 +160,7 @@ function ProductDetail() {
             <OpenModalButton
               modalComponent={<ReviewFormModal productId={product_id} />}
               buttonText="Post a Review"
+              style={{borderRadius: "5px", backgroundColor: "green", color: "white", cursor: "pointer"}}
             />
           )}
           {!isLoggedIn && (
@@ -177,12 +194,12 @@ function ProductDetail() {
                     <OpenModalButton
                       modalComponent={<ReviewFormModal productId={product_id} reviewData={review} />}
                       buttonText="Update Review"
-                      style={{borderRadius: "5px", backgroundColor: "black", color: "white", cursor: "pointer"}}                    
+                      style={{borderRadius: "5px", backgroundColor: "green", color: "white", cursor: "pointer"}}                    
                     />
                     <OpenModalButton
                       modalComponent={<DeleteReviewModal reviewId={review.id} />}
                       buttonText="Delete Review"
-                      style={{borderRadius: "5px", backgroundColor: "black", color: "white", cursor: "pointer"}}
+                      style={{borderRadius: "5px", backgroundColor: "green", color: "white", cursor: "pointer"}}
                     />
                   </div>
                 )}
