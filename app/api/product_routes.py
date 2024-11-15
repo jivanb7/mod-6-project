@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Product, db, Review, User
+from app.models import Product, db, Review, User, ProductImage
+from app.forms import NewProductForm
 
 product_routes = Blueprint('products', __name__)
 
@@ -18,10 +19,18 @@ def get_all_products():
 @login_required 
 def get_user_products():
     """
-    Get all the products of the current logged-in user.
+    Get all the products of the current logged-in user, including preview image.
     """
     products = Product.query.filter_by(user_id=current_user.id).all()
-    product_list = [product.to_dict() for product in products]
+    product_list = []
+
+    for product in products:
+        # Retrieve the preview image for the product
+        preview_image = ProductImage.query.filter_by(product_id=product.id, preview_image=True).first()
+        product_data = product.to_dict()
+        if preview_image:
+            product_data['preview_image'] = preview_image.image_url  # Add preview image URL
+        product_list.append(product_data)
 
     return jsonify(product_list), 200
 
@@ -45,7 +54,8 @@ def get_product_detail(product_id):
     
     product_data['preview_image'] = preview_image
 
-    return jsonify(product_data), 200 
+    return jsonify(product_data), 200
+
 
 @product_routes.route('/', methods=['POST'])
 @login_required
@@ -53,41 +63,43 @@ def create_product():
     """
     Create a new product by the logged-in user.
     """
-    data = request.get_json()
+    form = NewProductForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
 
-    category = data.get('category')
-    name = data.get('name')
-    description = data.get('description')
-    price = data.get('price')
-    stock = data.get('stock')
+    if form.validate_on_submit():
+        new_product = Product(
+            user_id=current_user.id,
+            category=form.data['category'],
+            name=form.data['name'],
+            description=form.data['description'],
+            price=form.data['price'],
+            stock=form.data['stock']
+        )
 
-    if category is None:
-        return jsonify({'error': 'Category is required'}), 400
-    if name is None:
-        return jsonify({'error': 'Name is required'}), 400
-    if description is None:
-        return jsonify({'error': 'Description is required'}), 400
-    if price is None:
-        return jsonify({'error': 'Price is required'}), 400
-    if stock is None:
-        return jsonify({'error': 'Stock is required'}), 400
+        # Save product to generate an ID
+        db.session.add(new_product)
+        db.session.commit()
 
-    new_product = Product(
-        category=category,
-        name=name,
-        description=description,
-        price=price,
-        stock=stock,
-        user_id=current_user.id 
-    )
+        # Collect image URLs and add them to ProductImage, marking the first as preview
+        image_urls = [form.data[f'image_url{i}'] for i in range(1, 6) if form.data.get(f'image_url{i}')]
 
-    db.session.add(new_product)
-    db.session.commit()
+        for idx, image_url in enumerate(image_urls):
+            product_image = ProductImage(
+                product_id=new_product.id,
+                image_url=image_url,
+                preview_image=(idx == 0)  # Mark the first image as preview
+            )
+            db.session.add(product_image)
 
-    return jsonify(new_product.to_dict()), 201
+        db.session.commit()
+
+        return jsonify(new_product.to_dict()), 201
+
+    return jsonify(form.errors), 400
+
 
 @product_routes.route('/<int:product_id>', methods=['PUT'])
-@login_required 
+@login_required
 def update_product(product_id):
     """
     Update the details of an existing product by the logged-in user.
@@ -103,17 +115,32 @@ def update_product(product_id):
 
     data = request.get_json()
 
-    category = data.get('category', product.category)
-    name = data.get('name', product.name)
-    description = data.get('description', product.description) 
-    price = data.get('price', product.price)
-    stock = data.get('stock', product.stock) 
+    # Update product details
+    product.category = data.get('category', product.category)
+    product.name = data.get('name', product.name)
+    product.description = data.get('description', product.description)
+    product.price = data.get('price', product.price)
+    product.stock = data.get('stock', product.stock)
 
-    product.category = category
-    product.name = name
-    product.description = description
-    product.price = price
-    product.stock = stock
+    # Handling images
+    image_urls = data.get('images', [])
+    if image_urls:
+        # Mark only the first image as preview
+        preview_image_url = image_urls[0]
+        optional_image_urls = image_urls[1:5]  # Up to 4 optional images
+
+        # Clear current images for this product
+        ProductImage.query.filter_by(product_id=product_id).delete()
+
+        # Add updated images
+        new_images = [
+            ProductImage(product_id=product.id, image_url=preview_image_url, preview_image=True)
+        ]
+        for url in optional_image_urls:
+            if url:
+                new_images.append(ProductImage(product_id=product.id, image_url=url, preview_image=False))
+
+        db.session.add_all(new_images)
 
     db.session.commit()
 

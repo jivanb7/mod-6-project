@@ -2,6 +2,8 @@
 import {useEffect, useState} from 'react';
 import './ShoppingCart.css';
 import {useSelector} from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 
 const ShoppingCart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -12,6 +14,8 @@ const ShoppingCart = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const sessionUser = useSelector(state => state.session.user);
+  const navigate = useNavigate();
+
 
 
   useEffect(() => {
@@ -86,6 +90,8 @@ const ShoppingCart = () => {
       .then(data => {
         setPurchasedItems(data.purchased_items);
         setCartItems([]); // Clear the cart items after checkout
+        navigate('/orders'); // Redirect to /orders after checkout
+
       })
       .catch(error => console.error('Error during checkout:', error));
   };

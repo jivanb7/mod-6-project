@@ -1,5 +1,6 @@
 import {useState, useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 import {FaUserCircle} from 'react-icons/fa';
 import {thunkLogout} from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
@@ -14,6 +15,7 @@ function ProfileButton()
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
+  const navigate = useNavigate();
 
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
@@ -42,6 +44,16 @@ function ProfileButton()
     closeMenu();
   };
 
+  const viewOrders = () => {
+    closeMenu();
+    navigate('/orders');
+  };
+
+  const viewInventory = () => {
+    closeMenu();
+    navigate('/inventory');
+  };
+
   return (
     <>
       <button className="profile-button-pointer" onClick={toggleMenu}>
@@ -53,6 +65,12 @@ function ProfileButton()
             <>
               <li>{user.username}</li>
               <li>{user.email}</li>
+              <li>
+                <button onClick={viewInventory} className="manage-products-button">Manage Products</button>
+              </li>
+              <li>
+                <button onClick={viewOrders} className="view-orders-button">View Orders</button>
+              </li>
               <li>
                 <button onClick={logout} className="logout-button">Log Out</button>
               </li>

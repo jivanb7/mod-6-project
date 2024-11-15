@@ -37,6 +37,7 @@ function FavoritesPage() {
   if (!sessionUser) {
     return <p>You must be logged in</p>
   }
+
   return (
     <>
       <h1>Your Favorites</h1>

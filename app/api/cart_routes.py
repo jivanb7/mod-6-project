@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import ShoppingCart, Product, db
+from app.models import ShoppingCart, Product, db, Order
+from datetime import datetime
 
 cart_routes = Blueprint('cart', __name__)
 
@@ -137,15 +138,15 @@ def checkout():
         return jsonify({'error': 'Your cart is empty'}), 400
 
     purchased_items = []
+    total_cost = 0
 
     # Process each item in the cart
     for item in cart_items:
         product = Product.query.get(item.product_id)
         if product:
-            purchased_items.append({
-                'name': product.name,
-                'quantity': item.quantity
-            })
+            item_total_price = item.quantity * float(product.price)
+            total_cost += item_total_price
+            purchased_items.append(f"{product.name}, {item.quantity}, ${item_total_price:.2f}")
 
             # Remove the item from the cart
             db.session.delete(item)
@@ -153,4 +154,18 @@ def checkout():
     # Commit the removal of cart items
     db.session.commit()
 
-    return jsonify({'purchased_items': purchased_items}), 200
+    order_details = "; ".join(purchased_items)
+
+    # Create a new order object
+    new_order = Order(
+        user_id=current_user.id,
+        details=order_details,
+        total=float(total_cost),
+        created_at=datetime.now()
+    )
+
+    # Add the order to the database
+    db.session.add(new_order)
+    db.session.commit()
+
+    return jsonify({'message': 'Checkout successful', 'order': new_order.to_dict()}), 200

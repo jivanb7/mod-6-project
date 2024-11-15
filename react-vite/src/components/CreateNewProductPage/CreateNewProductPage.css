@@ -1,0 +1,52 @@
+.create-product-form-div {
+  width: 500px;
+  margin: auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.create-product-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+.dollar-sign-price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dollar-sign-span {
+  font-size: 1.4rem;
+}
+
+.error-create-new-product-page {
+  color: red;
+  font-weight: normal;
+}
+
+.create-new-product {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.create-new-product:hover {
+  background-color: #0056b3;
+}

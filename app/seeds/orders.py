@@ -4,24 +4,21 @@ from datetime import datetime
 
 def seed_orders():
     order1 = Order(
-        user_id=1, 
-        product_id=1, 
-        quantity=1, 
-        total=699.99, 
+        user_id=1,
+        details='Decorative Stone, 5, $29.99; Waterfall Fountain, 1, $79.99',
+        total=109.98,
         created_at=datetime.now()
     )
     order2 = Order(
-        user_id=2, 
-        product_id=2, 
-        quantity=2, 
-        total=179.98, 
+        user_id=2,
+        details='Acer-5 Laptop, 1, $899.99; Acer-3 Desktop, 1, $599.99',
+        total=1499.98,
         created_at=datetime.now()
     )
     order3 = Order(
         user_id=3, 
-        product_id=3, 
-        quantity=1, 
-        total=19.99, 
+        details='Christmas Tree, 1, $49.99',
+        total=49.99,
         created_at=datetime.now()
     )
 

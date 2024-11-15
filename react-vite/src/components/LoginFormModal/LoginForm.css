@@ -62,8 +62,12 @@
   cursor: pointer;
   width: 100%;
   padding: 12px;
+  background-color: blue;
 }
 
+.demo-user-login:hover {
+  background-color: darkblue;
+}
 .error-message-login {
   color: red;
   font-size: 0.9rem;

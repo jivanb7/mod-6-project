@@ -63,3 +63,15 @@
   background-color: darkgreen;
   background: linear-gradient(to bottom, darkgreen, darkgreen);
 }
+
+.view-orders-button, .manage-products-button
+{
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

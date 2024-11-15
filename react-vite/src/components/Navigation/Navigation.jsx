@@ -19,6 +19,7 @@ function Navigation() {
       <div className="nav-right">
         {sessionUser && (
           <>
+            <Link to="/create-product" className="add-new-product">Add a New Product</Link>
             <Link to="/favorites" className="get-favorites">
               <PiHeartBold/>
             </Link>

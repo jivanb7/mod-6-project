@@ -28,20 +28,21 @@ function LoginFormModal() {
       closeModal();
     }
   };
-  // const handleLoginDemoUser = (e) => {
-  //   e.preventDefault();
-  //   const demoUserEmail = 'demo@user.io';
-  //   const demoUserPassword = 'password';
-  //   return dispatch(sessionActions.login({ credential:demoUserEmail, password: demoUserPassword }))
-  //     .then(closeModal)
-  //     .catch(async (res) => {
-  //       const data = await res.json();
-  //       if (data?.message) {
-  //         setErrors({credential: 'There was an error with demo user login'});
-  //       }
-  //     });
-  //
-  // };
+
+  const handleLoginDemoUser = async (e) => {
+    e.preventDefault();
+    const demoUserEmail = 'aaa@aa.io';
+    const demoUserPassword = 'pasword1!';
+    return await dispatch(thunkLogin({ email:demoUserEmail, password: demoUserPassword }))
+      .then(closeModal)
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data?.message) {
+          setErrors({credential: 'There was an error with demo user login'});
+        }
+      });
+
+  };
 
   // Check if the login button should be disabled
   const isButtonDisabled = email.length < 4 || password.length < 6;
@@ -86,8 +87,11 @@ function LoginFormModal() {
         >
           Log In
         </button>
+        <button className="demo-user-login" data-testid={'demo-user-login'} onClick={handleLoginDemoUser}>Login in demo
+          user
+        </button>
+
       </form>
-      {/*<button className="demo-user-login" data-testid={'demo-user-login'} onClick={handleLoginDemoUser}>Login in demo user</button>*/}
     </div>
   );
 }
