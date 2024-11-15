@@ -55,7 +55,7 @@ export default function LandingPage() {
         </div>
         <div className="help-center">
           <div className="help-text">Have a question? Well, we got some answers</div>
-          <button onClick={() => window.open("https://www.youtube.com/watch?v=CxAcgbKUFb4", "_blank")} className="shop-button">
+          <button onClick={() => window.open("https://github.com/jivanb7/mod-6-project/wiki", "_blank")} className="shop-button">
             Go to Help Center
           </button>
         </div>
