@@ -1,7 +1,7 @@
-const LOAD_PRODUCTS = "products/LOAD_PRODUCTS";
-const LOAD_PRODUCTS_ERROR = "products/LOAD_PRODUCTS_ERROR";
-const LOAD_PRODUCT_DETAIL = "products/LOAD_PRODUCT_DETAIL";
-const LOAD_PRODUCT_DETAIL_ERROR = "products/LOAD_PRODUCT_DETAIL_ERROR";
+const LOAD_PRODUCTS = "LOAD_PRODUCTS";
+const LOAD_PRODUCTS_ERROR = "LOAD_PRODUCTS_ERROR";
+const LOAD_PRODUCT_DETAIL = "LOAD_PRODUCT_DETAIL";
+const LOAD_PRODUCT_DETAIL_ERROR = "LOAD_PRODUCT_DETAIL_ERROR";
 
 const loadProducts = (products) => ({
   type: LOAD_PRODUCTS,
@@ -50,8 +50,8 @@ export const fetchProductDetail = (product_id) => async (dispatch) => {
 };
 
 const initialState = {
-  products: [], // <- a list of products (plural)
-  product: null, // <- just a single product
+  products: [], 
+  product: null, 
   error: null, 
 };
 
