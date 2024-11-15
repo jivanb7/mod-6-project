@@ -1,9 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchProductDetail } from "../../redux/productReducer";
 import { fetchProductReviews } from "../../redux/reviewReducer";
+import { addToCart } from "../../redux/cartReducer";
+import { addToFavorites, fetchFavorites, removeFromFavorites } from "../../redux/favoriteReducer"
 import { FaStar } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa6";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import './ProductDetail.css';
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import ReviewFormModal from "../ReviewFormModal/ReviewFormModal";
@@ -17,10 +21,40 @@ function ProductDetail() {
   const productError = useSelector((state) => state.products.error);
   const reviews = useSelector((state) => state.reviews.reviews);
   const currentUser = useSelector((state) => state.session.user);
+  const [selectedImage, setSelectedImage] = useState(product?.preview_image);
+  const favorites = useSelector((state) => state.favorites.favorites);
 
   const isOwner = currentUser && currentUser.id === product?.user_id;
   const isLoggedIn = Boolean(currentUser);
   const userReview = reviews.find((review) => review.user_id === currentUser?.id);
+  const nonPreviewImages = product?.non_preview_images || [];  
+  const isFavorited = favorites.some(favorite => favorite.product_id === product.id);
+
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product_id));
+  };
+
+  useEffect(() => {
+    if (currentUser) {
+      dispatch(fetchFavorites());
+    }
+  }, [dispatch, currentUser]);
+
+
+  const handleFavoriteToggle = () => {
+    if (isFavorited) {
+      dispatch(removeFromFavorites(product_id));
+    } else {
+      dispatch(addToFavorites(product_id)); 
+    }
+  };
+
+  useEffect(() => {
+    if (product && product.preview_image) {
+      setSelectedImage(product.preview_image);
+    }
+  }, [product]);  
 
   useEffect(() => {
     dispatch(fetchProductDetail(product_id));
@@ -53,20 +87,57 @@ function ProductDetail() {
     <div>
       <div className="product-detail">
         <div className="prodimage">
-          {product.preview_image && (
-            <img src={product.preview_image.image_url} alt={product.name} />
-          )}
+          <div className="thumbnail-column">
+            {[product.preview_image, ...nonPreviewImages].map((image) => (
+              <img
+                key={image.id}
+                src={image.image_url}
+                alt={`${product.name} thumbnail`}
+                className="thumbnail"
+                onClick={() => setSelectedImage(image)}
+              />
+            ))}
+          </div>
+          <div className="main-image">
+            {selectedImage && (
+              <img className="bigimg" src={selectedImage.image_url} alt={product.name} />
+            )}
+          </div>
         </div>
         <div className="prodinfo">
-          <h1>{product.name}</h1>
-          <p>{product.description}</p>
-          <p>Price: ${product.price}</p>
-          <p>Stock: {product.stock} available</p>
+          <div className="prodinfoinside">
+            <div className="prodnameheart">
+            <h1>{product.name}</h1>
+
+            
+            {currentUser && (
+            <button onClick={handleFavoriteToggle} className="favorite-button">
+            {isFavorited ? (
+              <FaHeart color="red" style={{ fontSize: "24px" }} />
+            ) : (
+              <FaRegHeart color="gray" style={{ fontSize: "24px" }} />
+            )}
+          </button>
+        )}
+
+            </div>
+
+
+            <h4>Sold By {product.username}</h4>
+            <p>{product.description}</p>
+          </div>
+          <div className="prodpricenumcart">
+            <p className="prodpricenum">Current Price : ${product.price}</p>
+            <p className="prodpricenum"> Quantity available : {product.stock} </p>
+            <div className="buttondiv">
+              <button className="cartbutton" onClick={handleAddToCart}>Add to Cart</button>
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="review-detail">
-        <h2>{reviews.length} Reviews <FaStar /></h2>
+        <h2 className="review-h2">{reviews.length} Reviews <FaStar /></h2>
 
         <div>
           {isLoggedIn && !isOwner && !userReview && (
@@ -76,7 +147,7 @@ function ProductDetail() {
             />
           )}
           {!isLoggedIn && (
-            <p>Log in to post a review!</p>
+            <p>Create an Account to leave a Review!</p>
           )}
         </div>
 
@@ -87,11 +158,14 @@ function ProductDetail() {
                 <div className="revstarall">
                   <div className="revstar-comment">
                     <p> {renderStars(review.rating)} </p>
-                    <p> {review.comment} </p>
-                    <p> {review.username} {new Date(review.created_at).toLocaleDateString()}</p>
+                    <p className="revcomment"> {review.comment} </p>
+                    <div className="revuseranddate">
+                      <p className="revuser"> {review.username} </p> 
+                      <p className="revdate">{new Date(review.created_at).toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"})}</p>
+                    </div>
                   </div>
                   <div className="revstarinfo">
-                    {review.recommended && (<p><strong>Recommended:</strong> Yes</p>)}
+                    {review.recommended && (<p className="recommended"> <FaCheck color="#228B22" /> Recommended this item</p>)}
                     <p><strong>Item Quality:</strong> {review.item_quality} <FaStar /> </p>
                     <p><strong>Shipping:</strong> {review.shipping} <FaStar /> </p>
                     <p><strong>Customer Service:</strong> {review.customer_service} <FaStar /> </p>
@@ -99,15 +173,17 @@ function ProductDetail() {
                 </div>
 
                 {isLoggedIn && review.user_id === currentUser?.id && (
-                  <div>
-                  <OpenModalButton
-                    modalComponent={<ReviewFormModal productId={product_id} reviewData={review} />}
-                    buttonText="Update Review"
-                  />
-                  <OpenModalButton
-                    modalComponent={<DeleteReviewModal reviewId={review.id} />}
-                    buttonText="Delete Review"
-                  />
+                  <div className="managebuttons">
+                    <OpenModalButton
+                      modalComponent={<ReviewFormModal productId={product_id} reviewData={review} />}
+                      buttonText="Update Review"
+                      style={{borderRadius: "5px", backgroundColor: "black", color: "white", cursor: "pointer"}}                    
+                    />
+                    <OpenModalButton
+                      modalComponent={<DeleteReviewModal reviewId={review.id} />}
+                      buttonText="Delete Review"
+                      style={{borderRadius: "5px", backgroundColor: "black", color: "white", cursor: "pointer"}}
+                    />
                   </div>
                 )}
               </div>

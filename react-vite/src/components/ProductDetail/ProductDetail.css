@@ -1,11 +1,126 @@
 .review-container {
     margin-bottom: 30px;
   }
-  
+
+.revstarall {
+  display: flex;
+  justify-content: space-between;
+}
+
+.revcomment {
+  max-width: 800px;
+}
+
+.revuser {
+  text-decoration: underline;
+  color: gray;
+}
+
+.revdate {
+  color: gray;
+}
+
+.revstarinfo {
+  margin-right: 200px;
+}
+
+.revuseranddate {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}
+
+.review-h2 {
+  text-align: left;
+}
+
 .product-detail {
   display: flex;
 }
 
-.revstarall {
+.main-image img {
+  width: 300px;
+  height: auto;
+  margin-right: 20px;
+}
+
+.thumbnail-column {
   display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+
+.thumbnail {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.thumbnail:hover, .thumbnail:active {
+  opacity: 1;
+}
+
+.prodimage {
+  display: flex;
+}
+
+.product-detail {
+  margin: 30px 150px;
+}
+
+.review-detail {
+  margin: 30px 200px;
+}
+
+.bigimg {
+  min-width: 700px;
+  max-width: 701px;
+  min-height: 599px;
+  max-height: 600px;
+}
+
+.prodinfo {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.prodinfoinside {
+  padding-top: 10px;
+}
+
+.buttondiv {
+  display: flex;
+  justify-content: center;
+}
+
+.cartbutton {
+  width: 250px;
+  height: 40px;
+  border-radius: 75px;
+  background-color: black;
+  color: white;
+}
+
+.cartbutton:hover {
+  background-color: gray;
+  cursor: pointer;
+}
+
+.prodpricenum {
+  text-align: center;
+}
+
+.managebuttons {
+  display: flex;
+  justify-content: space-between;
+  max-width: 220px;
+}
+
+.prodnameheart {
+  display: flex;
+  justify-content: space-between;
+  max-width: 430px;
 }

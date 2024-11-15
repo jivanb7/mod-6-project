@@ -47,12 +47,16 @@ def get_product_detail(product_id):
     product_data = product.to_dict()
 
     preview_image = None
+    non_preview_images = []
     for image in product.product_images:
+        image_data = image.to_dict()
         if image.preview_image:
-            preview_image = image.to_dict()
-            break
-    
+            preview_image = image_data
+        else:
+            non_preview_images.append(image_data)
+
     product_data['preview_image'] = preview_image
+    product_data['non_preview_images'] = non_preview_images
 
     return jsonify(product_data), 200
 
