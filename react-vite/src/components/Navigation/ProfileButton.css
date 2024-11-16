@@ -1,6 +1,6 @@
 .profile-button {
   border: none;
-  cursor: pointer;
+  cursor: default;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,7 +28,7 @@
 
 .profile-dropdown li {
   padding: 10px;
-  cursor: pointer;
+  cursor: default;
   text-align: center;
 }
 
@@ -50,7 +50,7 @@
 }
 
 .profile-button-pointer {
-  cursor: pointer;
+  cursor: default;
   padding: 8px;
   border: none;
   border-radius: 4px;
@@ -74,4 +74,13 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+.view-orders-button:hover, .manage-products-button:hover {
+  background-color: lightgray;
+}
+
+.profile-button-no-hover, .profile-button-no-hover:hover {
+  cursor: default;
 }

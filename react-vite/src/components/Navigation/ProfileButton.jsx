@@ -18,7 +18,7 @@ function ProfileButton()
   const navigate = useNavigate();
 
   const toggleMenu = (e) => {
-    e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
+    e.stopPropagation();
     setShowMenu(!showMenu);
   };
 
@@ -63,14 +63,16 @@ function ProfileButton()
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <>
-              <li>{user.username}</li>
-              <li>{user.email}</li>
+              <li className="profile-button-no-hover">{user.username}</li>
+              <li className="profile-button-no-hover">{user.email}</li>
+              <hr/>
               <li>
                 <button onClick={viewInventory} className="manage-products-button">Manage Products</button>
               </li>
               <li>
                 <button onClick={viewOrders} className="view-orders-button">View Orders</button>
               </li>
+              <hr/>
               <li>
                 <button onClick={logout} className="logout-button">Log Out</button>
               </li>

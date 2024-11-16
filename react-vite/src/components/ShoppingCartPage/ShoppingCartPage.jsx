@@ -2,7 +2,7 @@
 import {useEffect, useState} from 'react';
 import './ShoppingCart.css';
 import {useSelector} from "react-redux";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 
 const ShoppingCart = () => {
@@ -12,14 +12,14 @@ const ShoppingCart = () => {
   const [newQuantity, setNewQuantity] = useState({});
   const [purchasedItems, setPurchasedItems] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
+
 
   const sessionUser = useSelector(state => state.session.user);
   const navigate = useNavigate();
 
 
-
   useEffect(() => {
-    // Only fetch cart items if a user is logged in
     if (sessionUser) {
       setLoading(true);
       fetch('/api/cart/current')
@@ -50,6 +50,7 @@ const ShoppingCart = () => {
   const handleEditClick = (cartItemId, currentQuantity) => {
     setEditingId(cartItemId);
     setNewQuantity({...newQuantity, [cartItemId]: currentQuantity});
+    setIsEditing(true); // Disable checkout button
   };
 
   const handleQuantityChange = (e, cartItemId) => {
@@ -72,6 +73,8 @@ const ShoppingCart = () => {
           );
           setEditingId(null);
           setErrorMessage('');
+          setIsEditing(false);
+          navigate(0);
         } else {
           return response.json().then(data => {
             const errorMsg = data.error || 'Error updating quantity';
@@ -89,8 +92,8 @@ const ShoppingCart = () => {
       .then(response => response.json())
       .then(data => {
         setPurchasedItems(data.purchased_items);
-        setCartItems([]); // Clear the cart items after checkout
-        navigate('/orders'); // Redirect to /orders after checkout
+        setCartItems([]);
+        navigate('/orders');
 
       })
       .catch(error => console.error('Error during checkout:', error));
@@ -131,8 +134,10 @@ const ShoppingCart = () => {
         {cartItems.map((item) => (
           <li key={item.product_id} className="cart-item">
             <div className="item-details">
-              <span className="item-name">{item.name}</span>
-              <span className="item-price">${item.price.toFixed(2)}</span>
+              <Link className="item-details-product-link" to={`/product/${item.product_id}`}>
+              <span className="item-name">{item.name}</span>&nbsp;
+              <span className="item-price">(${item.price.toFixed(2)})</span>
+              </Link>
             </div>
 
             <div className="item-quantity">
@@ -148,7 +153,7 @@ const ShoppingCart = () => {
               )}
             </div>
 
-            <div className="item-total">
+            <div className="item-total"> &nbsp;
               Total: ${(item.total_price).toFixed(2)}
             </div>
 
@@ -178,7 +183,7 @@ const ShoppingCart = () => {
       </ul>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <button className="checkout-button" onClick={handleCheckout}>
+      <button className="checkout-button" onClick={handleCheckout} disabled={isEditing}>
       Checkout
       </button>
     </div>

@@ -21,6 +21,7 @@ def get_favorites():
             product_data = product.to_dict()
             if preview_image:
                 product_data['preview_image'] = preview_image.image_url  # Add preview image URL
+            product_data['product_id'] = product.id
             favorite_products.append(product_data)
 
     return jsonify(favorite_products), 200

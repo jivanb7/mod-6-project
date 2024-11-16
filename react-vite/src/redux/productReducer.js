@@ -7,6 +7,7 @@ const ADD_PRODUCT_ERROR = "ADD_PRODUCT_ERROR";
 const LOAD_USER_PRODUCTS = "LOAD_USER_PRODUCTS";
 const LOAD_USER_PRODUCTS_ERROR = "LOAD_USER_PRODUCTS_ERROR";
 const UPDATE_PRODUCT = "UPDATE_PRODUCT";
+const DELETE_PRODUCT = "DELETE_PRODUCT";
 
 
 const loadProducts = (products) => ({
@@ -53,6 +54,13 @@ const updateProduct = (product) => ({
   type: UPDATE_PRODUCT,
   product,
 })
+
+const deleteProduct = (productId) => ({
+  type: DELETE_PRODUCT,
+  productId,
+});
+
+
 
 export const fetchAllProducts = () => async (dispatch) => {
   try {
@@ -135,6 +143,25 @@ export const thunkUpdateProduct = (updatedProduct) => async (dispatch) => {
   }
 };
 
+export const thunkDeleteProduct = (productId) => async (dispatch) => {
+  try {
+    const response = await fetch(`/api/products/${productId}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || "Failed to delete product");
+    }
+
+    dispatch(deleteProduct(productId));
+    return true; // Return success status
+  } catch (error) {
+    console.error("Error deleting product:", error.message);
+    return false; // Return failure status
+  }
+};
+
 
 const initialState = {
   products: [], // <- a list of products (plural)
@@ -188,6 +215,17 @@ export default function productsReducer(state = initialState, action) {
         product: null, 
         error: action.error,
       };
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        userProducts: state.userProducts.filter(
+          (product) => product.id !== action.productId
+        ),
+        products: state.products.filter(
+          (product) => product.id !== action.productId
+        ),
+      error: null,
+    };
 
     default:
       return state;

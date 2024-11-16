@@ -1,37 +1,100 @@
 .inventory-grid {
   display: flex;
-  gap: 12px;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .inventory-container {
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
-  justify-content: space-between; /* Space between items to push edit button to the bottom */
-  height: 500px;
-  width: 200px;
+  align-items: center;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 15px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 20px;
 }
 
 .inventory-item {
-  flex-grow: 1; /* Allow content to grow and take available space */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.inventory-item .product-image {
-  width: 100%;
-  height: 150px;
-  border-radius: 8px;
+.inventory-item h2 {
+  margin: 0 0 8px 0;
+}
+
+.product-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+  margin: 8px 0;
 }
 
 .inventory-edit-div {
-  margin-top: auto; /* Pushes the edit button to the bottom of the container */
   cursor: pointer;
   text-align: center;
   border: 1px solid black;
-  padding: 8px;
   border-radius: 4px;
   background-color: #f0f0f0;
   list-style-type: none;
+  align-self: flex-start;
+  width: 100px;
+}
+
+@media (max-width: 600px) {
+  .inventory-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .product-image {
+    margin-bottom: 10px;
+  }
+}
+
+.remove-edit-inventory-div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inventory-remove-div {
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: red;
+  list-style-type: none;
+  align-self: flex-start;
+  width: 100px;
+  color: white;
+}
+
+.inventory-button {
+  padding: 10px;
+}
+
+.inventory-item p {
+  margin-bottom: 5px;
+}
+
+.inventory-remove-div:hover {
+  background-color: darkred;
+}
+
+.inventory-edit-div:hover {
+  background-color: darkgray;
 }

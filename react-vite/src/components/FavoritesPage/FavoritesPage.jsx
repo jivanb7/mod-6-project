@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import "./FavoritesPage.css";
+import {Link, useNavigate} from "react-router-dom";
 
 function FavoritesPage() {
   const sessionUser = useSelector((state) => state.session.user);
   const [favorites, setFavorites] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (sessionUser) {
@@ -45,19 +47,33 @@ function FavoritesPage() {
         <ul className="favorites-list">
           {favorites.map((favorite) => (
             <li key={favorite.id} className="favorite-item">
+              <Link to={`/product/${favorite.product_id}`}>
               <img src={favorite.preview_image} alt={favorite.name}/>
-              <h2>{favorite.name}</h2>
-              <p>Category: {favorite.category}</p>
-              <p>Description: {favorite.description}</p>
-              <p>Price: ${favorite.price.toFixed(2)}</p>
-              <p>Stock: {favorite.stock}</p>
-              <p>Added to Favorites At: {new Date(favorite.created_at).toLocaleString()}</p>
-              <button
-                className="remove-button"
-                onClick={() => handleRemove(favorite.id)}
-              >
-                Remove
-              </button>
+                </Link>
+              <div className="favorite-item-content">
+                <h2>{favorite.name}</h2>
+                <p>Category: {favorite.category}</p>
+                <p>Description: {favorite.description}</p>
+                <p>Price: ${favorite.price.toFixed(2)}</p>
+                <p>Stock: {favorite.stock}</p>
+                <div className="favorites-buttons">
+                  <button
+                    className="favorites-view-button"
+                    onClick={() => navigate(`/product/${favorite.product_id}`)}
+                  >
+                    View
+                  </button>
+                  &nbsp;
+                  <button
+                    className="remove-button"
+                    onClick={() => handleRemove(favorite.id)}
+                  >
+                    Remove
+                  </button>
+
+                </div>
+
+              </div>
             </li>
           ))}
         </ul>

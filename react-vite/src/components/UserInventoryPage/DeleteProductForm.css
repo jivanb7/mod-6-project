@@ -1,0 +1,26 @@
+.confirm-delete-product-modal {
+  padding: 20px;
+}
+
+.delete-product-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.red-button-delete-product {
+  background-color: red;
+}
+
+.red-button-delete-product, .dark-grey-button-cancel-delete-product {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.red-button-delete-product:hover {
+  background-color: darkred;
+}
+
+.dark-grey-button-cancel-delete-product:hover {
+    background-color: darkgray;
+
+}
