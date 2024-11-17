@@ -1,16 +1,14 @@
 import {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import "./FavoritesPage.css";
 import {Link, useNavigate} from "react-router-dom";
-import {addToCart} from "../../redux/cartReducer.js";
-import {fetchProductDetail} from "../../redux/productReducer.js";
 
 function FavoritesPage()
 {
   const sessionUser = useSelector((state) => state.session.user);
   const [favorites, setFavorites] = useState([]);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
 
   useEffect(() => {
     if (sessionUser) {
@@ -37,11 +35,6 @@ function FavoritesPage()
         }
       })
       .catch(error => console.error("Error removing favorite:", error));
-  };
-
-  const handleAddToCart = async (product_id) => {
-    await dispatch(addToCart(product_id));
-    dispatch(fetchProductDetail(product_id));
   };
 
   if (!sessionUser) {
@@ -71,15 +64,6 @@ function FavoritesPage()
                   >
                     View
                   </button>
-                  &nbsp;
-                  {favorite.stock > 0 &&
-                    <button
-                      className="favorites-add-button"
-                      onClick={() => handleAddToCart(favorite.product_id)}
-                    >
-                      Add to Cart
-                    </button>
-                  }
                   &nbsp;
                   <button
                     className="remove-button"
