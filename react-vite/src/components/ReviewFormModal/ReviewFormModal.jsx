@@ -35,6 +35,7 @@ const ReviewFormModal = ({ productId, reviewData }) => {
             return;
         }
 
+        console.log(`recommended: ${recommended}`);
         const reviewPayload = {
             item_quality: itemQuality,
             shipping,

@@ -215,6 +215,7 @@ def create_review(product_id):
     shipping = data.get('shipping')
     customer_service = data.get('customer_service')
     comment = data.get('comment')
+    recommended = data.get('recommended')
 
     if None in [item_quality, shipping, customer_service, comment]:
         return jsonify({'error': 'Item quality, shipping, customer service, and comment are required'}), 400
@@ -233,7 +234,7 @@ def create_review(product_id):
         shipping=shipping,
         customer_service=customer_service,
         rating=rating,
-        recommended=rating >= 4
+        recommended=recommended
     )
 
     db.session.add(new_review)
