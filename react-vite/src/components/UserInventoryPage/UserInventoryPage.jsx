@@ -5,7 +5,7 @@ import EditProductForm from './EditProductForm';
 import OpenInventoryModalButton from './OpenInventoryModalButton.jsx';
 import DeleteProductForm from "./DeleteProductForm.jsx";
 import './UserInventoryPage.css';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 
 const UserInventoryPage = () => {
@@ -30,7 +30,7 @@ const UserInventoryPage = () => {
     <div className="user-inventory-page">
       <h1>Your Inventory</h1>
       <div className="inventory-grid">
-        {userInventory.length === 0 && <p>You have no items for sale</p>}
+        {userInventory.length === 0 && <p>You have no items for sale.</p>}
         {userInventory.map((product) => (
           <div key={product.id} className="inventory-container">
             <img
@@ -67,6 +67,8 @@ const UserInventoryPage = () => {
           </div>
         ))}
       </div>
+      <br/>
+      <Link to="/create-product" className="add-new-product-inventory-page">Add a New Product</Link>
     </div>
   );
 };
