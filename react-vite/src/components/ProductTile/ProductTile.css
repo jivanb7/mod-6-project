@@ -73,3 +73,16 @@
 .button-add-cart:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.favorite-button {
+    cursor: pointer;
+}
+
+.align-add-and-favorite {
+    display: flex;
+    justify-content: space-between;
+}
+
+.manage-user-inventory {
+    cursor: pointer;
+}

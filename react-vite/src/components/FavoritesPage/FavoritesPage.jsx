@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import "./FavoritesPage.css";
 import {Link, useNavigate} from "react-router-dom";
+import {addToCart} from "../../redux/cartReducer.js";
+import {fetchProductDetail} from "../../redux/productReducer.js";
 
-function FavoritesPage() {
+function FavoritesPage()
+{
   const sessionUser = useSelector((state) => state.session.user);
   const [favorites, setFavorites] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (sessionUser) {
@@ -23,18 +27,22 @@ function FavoritesPage() {
     fetch(`/api/favorites/${favoriteId}`, {
       method: 'DELETE',
     })
-    .then(response => {
-      if (response.ok) {
-        setFavorites((prevFavorites) =>
-          prevFavorites.filter(favorite => favorite.id !== favoriteId)
-        );
-      } else {
-        console.error("Failed to remove favorite");
-      }
-    })
-    .catch(error => console.error("Error removing favorite:", error));
+      .then(response => {
+        if (response.ok) {
+          setFavorites((prevFavorites) =>
+            prevFavorites.filter(favorite => favorite.id !== favoriteId)
+          );
+        } else {
+          console.error("Failed to remove favorite");
+        }
+      })
+      .catch(error => console.error("Error removing favorite:", error));
   };
 
+  const handleAddToCart = async (product_id) => {
+    await dispatch(addToCart(product_id));
+    dispatch(fetchProductDetail(product_id));
+  };
 
   if (!sessionUser) {
     return <p>You must be logged in</p>
@@ -48,8 +56,8 @@ function FavoritesPage() {
           {favorites.map((favorite) => (
             <li key={favorite.id} className="favorite-item">
               <Link to={`/product/${favorite.product_id}`}>
-              <img src={favorite.preview_image} alt={favorite.name}/>
-                </Link>
+                <img src={favorite.preview_image} alt={favorite.name}/>
+              </Link>
               <div className="favorite-item-content">
                 <h2>{favorite.name}</h2>
                 <p>Category: {favorite.category}</p>
@@ -64,6 +72,15 @@ function FavoritesPage() {
                     View
                   </button>
                   &nbsp;
+                  {favorite.stock > 0 &&
+                    <button
+                      className="favorites-add-button"
+                      onClick={() => handleAddToCart(favorite.product_id)}
+                    >
+                      Add to Cart
+                    </button>
+                  }
+                  &nbsp;
                   <button
                     className="remove-button"
                     onClick={() => handleRemove(favorite.id)}
@@ -72,7 +89,6 @@ function FavoritesPage() {
                   </button>
 
                 </div>
-
               </div>
             </li>
           ))}

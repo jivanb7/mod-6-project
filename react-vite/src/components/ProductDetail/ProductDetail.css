@@ -98,6 +98,14 @@
   justify-content: center;
 }
 
+.owner-of-product {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+}
+
 .cartbutton {
   width: 250px;
   height: 40px;
@@ -125,4 +133,13 @@
   display: flex;
   justify-content: space-between;
   max-width: 430px;
+}
+
+.cartbutton:disabled {
+  background-color: darkgray;
+  cursor: default;
+}
+
+.favorite-button {
+    cursor: pointer;
 }

@@ -51,7 +51,8 @@
 .get-favorites:hover,
 .shopping-cart-icon:hover,
 .profile-button-icon:hover,
-.add-new-product:hover {
+.add-new-product:hover,
+.shopping-cart-total:hover {
   color: #A5D6A7;
 }
 
@@ -91,4 +92,13 @@
   text-decoration: none;
   padding: 12px;
   border-radius: 24px;
+}
+
+.shopping-cart-flex {
+  display: flex;
+  text-decoration: none;
+}
+
+.shopping-cart-total {
+  color: white;
 }

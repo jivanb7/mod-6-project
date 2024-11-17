@@ -169,3 +169,12 @@ def checkout():
     db.session.commit()
 
     return jsonify({'message': 'Checkout successful', 'order': new_order.to_dict()}), 200
+
+
+@cart_routes.route('/total', methods=['GET'])
+@login_required
+def get_cart_total_items():
+    total_items = db.session.query(
+        db.func.sum(ShoppingCart.quantity)
+    ).filter_by(user_id=current_user.id).scalar() or 0
+    return jsonify({'total_items': total_items}), 200

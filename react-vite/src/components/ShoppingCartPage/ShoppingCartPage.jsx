@@ -1,11 +1,12 @@
-// ShoppingCart.js
 import {useEffect, useState} from 'react';
 import './ShoppingCart.css';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
+import {fetchCartTotal} from "../../redux/cartReducer.js";
 
 
 const ShoppingCart = () => {
+  const dispatch = useDispatch();
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState(null);
@@ -40,6 +41,8 @@ const ShoppingCart = () => {
       .then(response => {
         if (response.ok) {
           setCartItems(prevItems => prevItems.filter(item => item.id !== cartItemId));
+          dispatch(fetchCartTotal());
+
         } else {
           console.error('Error deleting cart item');
         }
@@ -74,7 +77,7 @@ const ShoppingCart = () => {
           setEditingId(null);
           setErrorMessage('');
           setIsEditing(false);
-          navigate(0);
+          dispatch(fetchCartTotal());
         } else {
           return response.json().then(data => {
             const errorMsg = data.error || 'Error updating quantity';
@@ -93,6 +96,8 @@ const ShoppingCart = () => {
       .then(data => {
         setPurchasedItems(data.purchased_items);
         setCartItems([]);
+        dispatch(fetchCartTotal());
+
         navigate('/orders');
 
       })
@@ -135,8 +140,8 @@ const ShoppingCart = () => {
           <li key={item.product_id} className="cart-item">
             <div className="item-details">
               <Link className="item-details-product-link" to={`/product/${item.product_id}`}>
-              <span className="item-name">{item.name}</span>&nbsp;
-              <span className="item-price">(${item.price.toFixed(2)})</span>
+                <span className="item-name">{item.name}</span>&nbsp;
+                <span className="item-price">(${item.price.toFixed(2)})</span>
               </Link>
             </div>
 
@@ -184,7 +189,7 @@ const ShoppingCart = () => {
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       <button className="checkout-button" onClick={handleCheckout} disabled={isEditing}>
-      Checkout
+        Checkout
       </button>
     </div>
   );

@@ -74,3 +74,18 @@
 .favorites-view-button:hover {
   background-color: darkblue;
 }
+
+.favorites-add-button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  align-self: flex-start;
+  transition: background-color 0.3s ease;
+}
+
+.favorites-add-button:hover {
+  background-color: darkgreen;
+}

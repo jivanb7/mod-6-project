@@ -1,11 +1,23 @@
 import ProfileButton from "./ProfileButton";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {PiShoppingCartSimple, PiHeartBold} from "react-icons/pi";
 import "./Navigation.css";
+import {useEffect} from "react";
+import {fetchCartTotal} from "../../redux/cartReducer.js";
 
-function Navigation() {
+function Navigation()
+{
   const sessionUser = useSelector(state => state.session.user);
+  const totalItems = useSelector((state) => state.cart.totalItems);
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    if (sessionUser)
+      dispatch(fetchCartTotal());
+  }, [dispatch, sessionUser]);
+
 
   return (
     <header className="navigation">
@@ -25,8 +37,9 @@ function Navigation() {
             </Link>
           </>
         )}
-        <Link to="/shopping-cart">
+        <Link to="/shopping-cart" className="shopping-cart-flex">
           <PiShoppingCartSimple className="shopping-cart-icon"/>
+          {sessionUser && totalItems > 0 && <span className="shopping-cart-total">+{totalItems}</span>}
         </Link>
         <ProfileButton className="profile-button-pointer"/>
       </div>
