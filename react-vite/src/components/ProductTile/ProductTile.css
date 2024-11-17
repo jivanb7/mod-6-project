@@ -86,3 +86,8 @@
 .manage-user-inventory {
     cursor: pointer;
 }
+
+.limited-quantity-available {
+    text-align: left;
+    font-size: 14px;
+}

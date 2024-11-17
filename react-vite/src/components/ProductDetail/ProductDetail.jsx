@@ -12,6 +12,7 @@ import './ProductDetail.css';
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import ReviewFormModal from "../ReviewFormModal/ReviewFormModal";
 import DeleteReviewModal from "../DeleteReviewModal/DeleteReviewModal";
+import {fetchAllProducts} from "../../redux/productReducer.js";
 
 function ProductDetail()
 {
@@ -36,6 +37,7 @@ function ProductDetail()
   const handleAddToCart = async () => {
     await dispatch(addToCart(product_id));
     dispatch(fetchProductDetail(product_id));
+    dispatch(fetchAllProducts());
   };
 
   useEffect(() => {
@@ -193,7 +195,7 @@ function ProductDetail()
           )}
         </div>
 
-        {reviews.length > 0 ? (
+        {reviews.length > 0 && (
           <div>
             {reviews.map((review) => (
               <div key={review.id} className="review-container">
@@ -236,9 +238,9 @@ function ProductDetail()
               </div>
             ))}
           </div>
-        ) : (
-          <p>Be the first to post a review!</p>
         )}
+        {reviews.length === 0 && !isOwner && currentUser && <p>Be the first to post a review!</p>}
+        {reviews.length === 0 && isOwner && currentUser && <p>No reviews for your product.</p> }
       </div>
     </div>
   );

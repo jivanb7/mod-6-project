@@ -3,6 +3,7 @@ import './ShoppingCart.css';
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import {fetchCartTotal} from "../../redux/cartReducer.js";
+import {fetchAllProducts} from "../../redux/productReducer.js";
 
 
 const ShoppingCart = () => {
@@ -42,7 +43,7 @@ const ShoppingCart = () => {
         if (response.ok) {
           setCartItems(prevItems => prevItems.filter(item => item.id !== cartItemId));
           dispatch(fetchCartTotal());
-
+          dispatch(fetchAllProducts());
         } else {
           console.error('Error deleting cart item');
         }
@@ -78,6 +79,8 @@ const ShoppingCart = () => {
           setErrorMessage('');
           setIsEditing(false);
           dispatch(fetchCartTotal());
+          dispatch(fetchAllProducts());
+
         } else {
           return response.json().then(data => {
             const errorMsg = data.error || 'Error updating quantity';

@@ -26,6 +26,7 @@ const UserInventoryPage = () => {
 
   if (!userInventory) return <p>Loading...</p>;
 
+
   return (
     <div className="user-inventory-page">
       <h1>Your Inventory</h1>
@@ -33,11 +34,13 @@ const UserInventoryPage = () => {
         {userInventory.length === 0 && <p>You have no items for sale.</p>}
         {userInventory.map((product) => (
           <div key={product.id} className="inventory-container">
+            <Link to={`/product/${product.id}`}>
             <img
               src={product.preview_image}
               alt={product.name}
               className="product-image"
             />
+              </Link>
             <div className="inventory-item">
               <h2>{product.name}</h2>
               <p>Quantity: {product.stock}</p>

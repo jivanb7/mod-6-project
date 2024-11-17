@@ -10,6 +10,7 @@ import './ProductTile.css'
 import {useSelector} from "react-redux";
 import {addToFavorites, fetchFavorites, removeFromFavorites} from "../../redux/favoriteReducer";
 import {FaHeart, FaRegHeart} from "react-icons/fa";
+import {fetchAllProducts} from "../../redux/productReducer.js";
 
 
 export default function ProductsPage({product}) {
@@ -32,6 +33,7 @@ export default function ProductsPage({product}) {
     }
   }, [dispatch, currentUser]);
 
+
   useEffect(() => {
     if (favorites && product_id) {
       const isFavorited = favorites.some((favorite) => favorite.product_id === Number(product_id));
@@ -44,10 +46,11 @@ export default function ProductsPage({product}) {
     navigate(`/product/${product.id}`)
   }
 
-  const handleAddToCart = (event) => {
+  const handleAddToCart =  async (event) => {
     event.stopPropagation();
     if (!isAddedToCart) {
-      dispatch(addToCart(product.id));
+      await dispatch(addToCart(product.id));
+      dispatch(fetchAllProducts());
       setIsAddedToCart(true);
     }
   };
@@ -104,6 +107,8 @@ export default function ProductsPage({product}) {
         }
       </div>
       <div className="product-price">${product.price.toFixed(2)}</div>
+      {product.stock > 0 && product.stock < 5 && <div className="limited-quantity-available">Limited supply available</div>}
+
       {product.stock === 0 && <p>Out of stock</p>}
       {product.stock > 0 && currentUser && !isOwner &&
         <button

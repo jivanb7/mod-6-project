@@ -7,6 +7,7 @@ import {FaUser} from 'react-icons/fa';
 import {FaStar} from 'react-icons/fa';
 import './SmallProductTile.css'
 import {addToFavorites, fetchFavorites, removeFromFavorites} from "../../redux/favoriteReducer.js";
+import {fetchAllProducts} from "../../redux/productReducer.js";
 
 export default function ProductsPage({product}) {
   const navigate = useNavigate();
@@ -44,6 +45,7 @@ export default function ProductsPage({product}) {
     if (!isAddedToCart) {
       dispatch(addToCart(product.id));
       setIsAddedToCart(true);
+      dispatch(fetchAllProducts());
     }
   };
 
@@ -99,6 +101,8 @@ export default function ProductsPage({product}) {
         }
       </div>
       <div className="small-product-price">${product.price.toFixed(2)}</div>
+      {product.stock > 0 && product.stock < 5 && <div className="limited-quantity-available">Limited supply available</div>}
+
       {product.stock === 0 && <p>Out of stock</p>}
       {product.stock > 0 && currentUser && !isOwner &&
         <button
