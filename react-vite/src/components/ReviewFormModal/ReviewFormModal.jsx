@@ -141,8 +141,8 @@ const ReviewFormModal = ({ productId, reviewData }) => {
 
             <div style={{ margin: '10px 0' }}>
                 <label><strong>Would you recommend this product?</strong></label>
-                <div>
-                    <label>
+                <div style={{display: "flex", justifyContent: "space-evenly", marginTop: "10px"}}>
+                    <label style={{ display: 'inline-flex', alignItems: 'center' }}>
                         <input
                             type="radio"
                             name="recommended"
@@ -150,9 +150,9 @@ const ReviewFormModal = ({ productId, reviewData }) => {
                             checked={recommended === true}
                             onChange={() => setRecommended(true)}
                         />
-                        Yes
+                        <span style={{ marginLeft: '5px' }}>Yes</span>
                     </label>
-                    <label style={{ marginLeft: '20px' }}>
+                    <label style={{ display: 'inline-flex', alignItems: 'center'}}>
                         <input
                             type="radio"
                             name="recommended"
@@ -160,12 +160,12 @@ const ReviewFormModal = ({ productId, reviewData }) => {
                             checked={recommended === false}
                             onChange={() => setRecommended(false)}
                         />
-                        No
+                        <span style={{ marginLeft: '5px' }}>No</span>
                     </label>
                 </div>
             </div>
 
-            <button type="submit" style={{ backgroundColor: "blue", color: "white", padding: '10px', border: 'none', borderRadius: '5px' }}>
+            <button type="submit" style={{ backgroundColor: "green", color: "white", padding: '10px', border: 'none', borderRadius: '5px' }}>
                 {reviewData ? 'Update Review' : 'Submit Review'}
             </button>
         </form>
