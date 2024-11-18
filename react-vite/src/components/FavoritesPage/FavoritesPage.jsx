@@ -41,20 +41,29 @@ function FavoritesPage()
     return <p>You must be logged in</p>
   }
 
-  return (
-    <>
-      <h1>Your Favorites</h1>
-      {favorites.length > 0 ? (
-        <ul className="favorites-list">
+return (
+  <div className="favorites-page">
+    <h1>Your Favorites</h1>
+    {favorites.length > 0 ? (
+      <section>
+        <ul className="favorites-list" role="list">
           {favorites.map((favorite) => (
-            <li key={favorite.id} className="favorite-item">
-              <Link to={`/product/${favorite.product_id}`}>
-                <img src={favorite.preview_image} alt={favorite.name}/>
+            <li
+              key={favorite.id}
+              className="favorite-item"
+              role="listitem"
+              aria-label={`Favorite: ${favorite.name}`}
+            >
+
+              <Link className="favorites-product-link" to={`/product/${favorite.product_id}`}
+                    aria-label={`View ${favorite.name}`}>
+                <img className="favorites-product-img" src={favorite.preview_image} alt={favorite.name}/>
+
               </Link>
               <div className="favorite-item-content">
-                <h2>{favorite.name}</h2>
+                <h2 className="favorites-product-name">{favorite.name}</h2>
                 <p>Category: {favorite.category}</p>
-                <p>Description: {favorite.description}</p>
+                <p>{favorite.description}</p>
                 <p>Price: ${favorite.price.toFixed(2)}</p>
                 <p>Stock: {favorite.stock}</p>
                 <div className="favorites-buttons">
@@ -63,25 +72,25 @@ function FavoritesPage()
                     onClick={() => navigate(`/product/${favorite.product_id}`)}
                   >
                     View
-                  </button>
-                  &nbsp;
+                  </button>&nbsp;
                   <button
                     className="remove-button"
                     onClick={() => handleRemove(favorite.id)}
                   >
                     Remove
                   </button>
-
                 </div>
               </div>
             </li>
           ))}
         </ul>
-      ) : (
-        <p>No favorites found.</p>
-      )}
-    </>
-  );
+      </section>
+    ) : (
+      <p className="center-text-favorites-page">No favorites found.</p>
+    )}
+  </div>
+);
+
 }
 
 export default FavoritesPage;

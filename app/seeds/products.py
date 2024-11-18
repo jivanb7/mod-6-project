@@ -9,7 +9,7 @@ def seed_products():
         name="Angelic Snowfall Ornament",
         description="An awesome and amazing addition. This angelic ornament brings a blissful snowfall to your holiday scene with serene snowflakes and stunning details",
         price=25.67,
-        stock=1,
+        stock=7,
         created_at=datetime.now()
     )
     product2 = Product(

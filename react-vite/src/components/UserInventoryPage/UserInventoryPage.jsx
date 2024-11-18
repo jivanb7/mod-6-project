@@ -29,9 +29,11 @@ const UserInventoryPage = () => {
 
   return (
     <div className="user-inventory-page">
+      <br/>
       <h1>Your Inventory</h1>
+      <hr/><br/>
       <div className="inventory-grid">
-        {userInventory.length === 0 && <p>You have no items for sale.</p>}
+        {userInventory.length === 0 && <p className="no-items-for-sale">You have no items for sale.</p>}
         {userInventory.map((product) => (
           <div key={product.id} className="inventory-container">
             <Link to={`/product/${product.id}`}>
@@ -42,7 +44,7 @@ const UserInventoryPage = () => {
             />
               </Link>
             <div className="inventory-item">
-              <h2>{product.name}</h2>
+              <h2 className="inventory-item-name">{product.name}</h2>
               <p>Quantity: {product.stock}</p>
               <p>Price: ${product.price}</p>
               <div className="product-description">
@@ -71,7 +73,7 @@ const UserInventoryPage = () => {
         ))}
       </div>
       <br/>
-      <Link to="/create-product" className="add-new-product-inventory-page">Add a New Product</Link>
+      <Link to="/create-product" className="add-new-product-inventory-page">+ Add a New Product</Link>
     </div>
   );
 };

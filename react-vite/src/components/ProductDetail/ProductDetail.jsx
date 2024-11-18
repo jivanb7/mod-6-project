@@ -135,7 +135,7 @@ function ProductDetail()
               <h1>{product.name}</h1>
 
 
-              {!isOwner && (
+              {!isOwner && currentUser && (
                 <button
                   onClick={handleFavoriteToggle}
                   className="favorite-button"
@@ -168,13 +168,16 @@ function ProductDetail()
                 </Link>
               </div>)
             }
-            {!isOwner && (
+            {!isOwner && currentUser && (
               <div className="buttondiv">
                 <button className="cartbutton" onClick={handleAddToCart} disabled={product.stock === 0}>Add to Cart
                 </button>
               </div>
             )}
-
+            {!currentUser &&
+              <div className="buttondiv">
+              <p>Create an account or login to add items to your cart</p>
+              </div>}
           < /div>
         </div>
       </div>

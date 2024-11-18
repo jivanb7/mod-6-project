@@ -1,3 +1,9 @@
+.user-inventory-page {
+  width: 80%;
+  margin: auto;
+}
+
+
 .inventory-grid {
   display: flex;
   flex-direction: column;
@@ -68,7 +74,7 @@
 
 .remove-edit-inventory-div {
   display: flex;
-  justify-content: space-between;
+  margin-left: auto;
 }
 
 .inventory-remove-div {
@@ -81,6 +87,7 @@
   align-self: flex-start;
   width: 100px;
   color: white;
+  margin-left: 5px;
 }
 
 .inventory-button {
@@ -99,18 +106,32 @@
   background-color: darkgray;
 }
 
+
+.add-new-product-inventory-page:hover {
+  background-color: darkgreen;
+}
+
+.user-inventory-page {
+  display: flex;
+  flex-direction: column;
+}
+
 .add-new-product-inventory-page {
-  background-color: green;
-  color: white;
-  border: none;
-  padding: 8px 16px;
+  background-color: lightgray;
+  color: black;
+  border: 1px solid black;
+  padding: 18px 16px;
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 0.3s ease;
   text-decoration: none;
   margin-top: 20px;
+  align-self: center;
+  text-align: center;
+  margin-right: 10px;
+  width: 64%;
 }
 
 .add-new-product-inventory-page:hover {
-  background-color: darkgreen;
+  background-color: darkgray;
 }

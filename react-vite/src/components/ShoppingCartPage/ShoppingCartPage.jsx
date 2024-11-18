@@ -108,7 +108,7 @@ const ShoppingCart = () => {
   };
 
   if (!sessionUser) {
-    return <p>You must log in or sign up to add items to the shopping cart.</p>
+    return <p className="shopping-cart-center-text">You must log in or sign up to add items to the shopping cart.</p>
   }
 
 
@@ -132,17 +132,24 @@ const ShoppingCart = () => {
   }
 
   if (!Array.isArray(cartItems) || cartItems.length === 0) {
-    return <p>Your cart is empty.</p>;
+    return (<div className="shopping-cart">
+      <h2 className="shopping-cart-center-text">Your Shopping Cart</h2><br/><hr/>
+        <br/><br/>
+        <p className="shopping-cart-center-text">Your cart is empty.</p>
+      </div>
+    );
+
   }
 
   return (
     <div className="shopping-cart">
-      <h2>Your Shopping Cart</h2>
+      <h2>Your Shopping Cart</h2><br/><hr/>
       <ul className="cart-items">
         {cartItems.map((item) => (
           <li key={item.product_id} className="cart-item">
             <div className="item-details">
               <Link className="item-details-product-link" to={`/product/${item.product_id}`}>
+                <img src={item.preview_image} alt={item.name} className="item-image-cart"/>
                 <span className="item-name">{item.name}</span>&nbsp;
                 <span className="item-price">(${item.price.toFixed(2)})</span>
               </Link>
@@ -190,7 +197,7 @@ const ShoppingCart = () => {
         ))}
       </ul>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-
+<hr/>
       <button className="checkout-button" onClick={handleCheckout} disabled={isEditing}>
         Checkout
       </button>

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import ShoppingCart, Product, db, Order
+from app.models import ShoppingCart, Product, db, Order, ProductImage
 from datetime import datetime
 
 cart_routes = Blueprint('cart', __name__)
@@ -20,13 +20,15 @@ def get_cart():
     for item in cart_items:
         product = Product.query.get(item.product_id)
         if product:
+            preview_image = ProductImage.query.filter_by(product_id=product.id, preview_image=True).first()
             cart_products.append({
                 'id': item.id,
                 'product_id': product.id,
                 'name': product.name,
                 'price': float(product.price),
                 'quantity': item.quantity,
-                'total_price': float(item.quantity * product.price)
+                'total_price': float(item.quantity * product.price),
+                'preview_image': preview_image.image_url
             })
 
     return jsonify(cart_products), 200

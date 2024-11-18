@@ -5,19 +5,19 @@ from datetime import datetime
 def seed_shopping_carts():
     cart1 = ShoppingCart(
         user_id=1,
-        product_id=1,
+        product_id=3,
         quantity=1,
         added_at=datetime.now()
     )
     cart2 = ShoppingCart(
         user_id=2,
-        product_id=2,
+        product_id=1,
         quantity=2,
         added_at=datetime.now()
     )
     cart3 = ShoppingCart(
         user_id=3,
-        product_id=3,
+        product_id=1,
         quantity=1,
         added_at=datetime.now()
     )
